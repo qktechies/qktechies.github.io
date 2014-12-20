@@ -15,7 +15,7 @@ categories:
 
 查看是否安装成功:
 
-```
+```bash
 $node --version
 v0.10.33
 
@@ -144,20 +144,25 @@ npm install grunt --save-dev会自动加入devDependencies的版本信息
 
 ####version版本
 版本格式MAJOR.MINOR.PATCH 例如"version": "1.0.0"
+
 MAJOR 不兼容的API发布
+
 MINOR 向后兼容的功能发布
+
 PATCH 向后兼容的bug修复
+
 
 - Gruntfile.js
 
 npm是寻找当前目录的package.json
 而grunt是寻找当前目录下的Gruntfile.js
 
-内部代码都类似:
 
 ```javascript
-module.exports = function(grunt) {   // Do grunt-related things in here};
+module.exports = function(grunt) {   // grunt相关任务放在这};
 ```
+
+接下来就是熟悉Grunt的API了
 
 
  
