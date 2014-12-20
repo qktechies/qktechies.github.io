@@ -4,7 +4,7 @@
   <title><![CDATA[qkong的技术博客]]></title>
   <link href="http://qktechies.github.io/atom.xml" rel="self"/>
   <link href="http://qktechies.github.io/"/>
-  <updated>2014-12-20T11:10:11+08:00</updated>
+  <updated>2014-12-20T11:38:47+08:00</updated>
   <id>http://qktechies.github.io/</id>
   <author>
     <name><![CDATA[qktechies]]></name>
@@ -14,11 +14,22 @@
 
   
   <entry>
+    <title type="html"><![CDATA[测试2]]></title>
+    <link href="http://qktechies.github.io/blog/2014/12/20/ce-shi-2/"/>
+    <updated>2014-12-20T11:37:21+08:00</updated>
+    <id>http://qktechies.github.io/blog/2014/12/20/ce-shi-2</id>
+    <content type="html"><![CDATA[<p>测试文章</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Demo]]></title>
     <link href="http://qktechies.github.io/blog/2014/12/20/demo/"/>
-    <updated>2014-12-20T10:28:00+08:00</updated>
+    <updated>2014-12-20T11:30:39+08:00</updated>
     <id>http://qktechies.github.io/blog/2014/12/20/demo</id>
     <content type="html"><![CDATA[<h1>demo</h1>
+
+<p>测试文章</p>
 ]]></content>
   </entry>
   
