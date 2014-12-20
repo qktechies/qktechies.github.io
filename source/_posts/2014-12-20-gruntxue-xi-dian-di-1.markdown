@@ -155,7 +155,7 @@ npm是寻找当前目录的package.json
 
 内部代码都类似:
 
-```
+```javascript
 module.exports = function(grunt) {   // Do grunt-related things in here};
 ```
 
