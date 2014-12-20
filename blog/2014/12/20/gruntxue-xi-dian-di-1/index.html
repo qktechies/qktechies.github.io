@@ -123,7 +123,7 @@ v0.10.33 $npm -- &hellip;">
 <ul>
 <li><h4>module</h4>
 
-<p>一个代表模块本生的对象</p></li>
+<p>一个代表模块本身的对象</p></li>
 <li><h4>exports</h4>
 
 <p>提供对外访问的接口,利用require可以得到exports对象</p></li>
@@ -185,12 +185,134 @@ v0.10.33 $npm -- &hellip;">
 </span><span class='line'>$npm install grunt</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>项目的设置</h3>
+<h3>项目环境设置</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>|___my-project
+</span><span class='line'>  |__node_modules
+</span><span class='line'>  |   |__grunt
+</span><span class='line'>  |__Gruntfile.js
+</span><span class='line'>  |__package.json</span></code></pre></td></tr></table></div></figure>
+
 
 <ul>
-<li>package.json</li>
+<li>package.json
+包描述文件,包含模块所有的元数据:名字,版本,描述,作者</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;npm init
+</span><span class='line'>This utility will walk you through creating a package.json file.
+</span><span class='line'>It only covers the most common items, and tries to guess sane defaults.
+</span><span class='line'>
+</span><span class='line'>See `npm help json` for definitive documentation on these fields
+</span><span class='line'>and exactly what they do.
+</span><span class='line'>
+</span><span class='line'>Use `npm install &lt;pkg&gt; --save` afterwards to install a package and
+</span><span class='line'>save it as a dependency in the package.json file.
+</span><span class='line'>
+</span><span class='line'>Press ^C at any time to quit.
+</span><span class='line'>name: (my-project)
+</span><span class='line'>version: (1.0.0)
+</span><span class='line'>description: my-project demo
+</span><span class='line'>entry point: (Gruntfile.js)
+</span><span class='line'>test command:
+</span><span class='line'>git repository:
+</span><span class='line'>keywords:
+</span><span class='line'>author:
+</span><span class='line'>license: (ISC)
+</span><span class='line'>About to write to /Users/qkong/Documents/demo_code/my-project/package.json:
+</span><span class='line'>
+</span><span class='line'>{
+</span><span class='line'>  "name": "my-project",
+</span><span class='line'>  "version": "1.0.0",
+</span><span class='line'>  "description": "my-project demo",
+</span><span class='line'>  "main": "Gruntfile.js",
+</span><span class='line'>  "dependencies": {
+</span><span class='line'>    "grunt": "^0.4.5"
+</span><span class='line'>  },
+</span><span class='line'>  "devDependencies": {},
+</span><span class='line'>  "scripts": {
+</span><span class='line'>    "test": "echo \"Error: no test specified\" && exit 1"
+</span><span class='line'>  },
+</span><span class='line'>  "author": "",
+</span><span class='line'>  "license": "ISC"
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>dependencies属性</h4>
+
+<p>一般github是不会上传node_modules的文件,我们必须安装所需的包,运行
+npm install(后面不跟包名)上,npm会查询当前目录下的package.json并解析它,所有在dependencies的包都会被安装,</p>
+
+<p>npm install grunt &ndash;save会自动加入dependencies的版本信息</p>
+
+<p>npm install grunt &ndash;save-dev会自动加入devDependencies的版本信息</p>
+
+<p>区别是:&ndash;save-dev一般用于测试框架mocha等等,一般部署到服务器上时,不带有node_modules文件夹,可能有模块不同系统不兼容的问题,所以需要npm install安装所有dependencies中包括的所有包信息,而devDependencies只是用于平时开发测试,服务器上是不需要的</p>
+
+<h4>version版本</h4>
+
+<p>版本格式MAJOR.MINOR.PATCH 例如&#8221;version&#8221;: &ldquo;1.0.0&rdquo;
+MAJOR 不兼容的API发布
+MINOR 向后兼容的功能发布
+PATCH 向后兼容的bug修复</p>
+
+<ul>
 <li>Gruntfile.js</li>
 </ul>
+
+
+<p>npm是寻找当前目录的package.json
+而grunt是寻找当前目录下的Gruntfile.js</p>
+
+<p>内部代码都类似:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>module.exports = function(grunt) {   // Do grunt-related things in here};</span></code></pre></td></tr></table></div></figure>
+
+
 
 </div>
 
