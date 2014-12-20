@@ -31,7 +31,7 @@ Commonjs的说明:[http://wiki.commonjs.org/wiki/CommonJS](http://wiki.commonjs.
 三个重要的说明:
 
 - ####module
-一个代表模块本生的对象
+一个代表模块本身的对象
 
 - ####exports
 提供对外访问的接口,利用require可以得到exports对象
@@ -80,9 +80,84 @@ $cd my-project
 $npm install grunt
 ```
 
-###项目的设置
+###项目环境设置
+```
+|___my-project
+	|__node_modules
+	|	|__grunt
+	|__Gruntfile.js
+	|__package.json
+```
+
 - package.json
+包描述文件,包含模块所有的元数据:名字,版本,描述,作者
+
+```
+>npm init
+This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sane defaults.
+
+See `npm help json` for definitive documentation on these fields
+and exactly what they do.
+
+Use `npm install <pkg> --save` afterwards to install a package and
+save it as a dependency in the package.json file.
+
+Press ^C at any time to quit.
+name: (my-project)
+version: (1.0.0)
+description: my-project demo
+entry point: (Gruntfile.js)
+test command:
+git repository:
+keywords:
+author:
+license: (ISC)
+About to write to /Users/qkong/Documents/demo_code/my-project/package.json:
+
+{
+  "name": "my-project",
+  "version": "1.0.0",
+  "description": "my-project demo",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt": "^0.4.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
+```
+
+####dependencies属性
+一般github是不会上传node_modules的文件,我们必须安装所需的包,运行
+npm install(后面不跟包名)上,npm会查询当前目录下的package.json并解析它,所有在dependencies的包都会被安装,
+
+npm install grunt --save会自动加入dependencies的版本信息
+
+npm install grunt --save-dev会自动加入devDependencies的版本信息
+
+区别是:--save-dev一般用于测试框架mocha等等,一般部署到服务器上时,不带有node_modules文件夹,可能有模块不同系统不兼容的问题,所以需要npm install安装所有dependencies中包括的所有包信息,而devDependencies只是用于平时开发测试,服务器上是不需要的
+
+####version版本
+版本格式MAJOR.MINOR.PATCH 例如"version": "1.0.0"
+MAJOR 不兼容的API发布
+MINOR 向后兼容的功能发布
+PATCH 向后兼容的bug修复
+
 - Gruntfile.js
+
+npm是寻找当前目录的package.json
+而grunt是寻找当前目录下的Gruntfile.js
+
+内部代码都类似:
+
+```
+module.exports = function(grunt) {   // Do grunt-related things in here};
+```
 
 
  
