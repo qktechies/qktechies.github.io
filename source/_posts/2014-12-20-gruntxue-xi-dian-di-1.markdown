@@ -39,7 +39,7 @@ Commonjs的说明:[http://wiki.commonjs.org/wiki/CommonJS](http://wiki.commonjs.
 - ####require
 用于import模块,返回exports对象
 
-```
+```javascript
 //三个文件index.js,increment.js,math.js
 //program.js
 var inc = require('./increment').increment; 
@@ -54,7 +54,7 @@ math.js对外提供add接口
 
 运行结果:
 
-```
+```bash
 $node program.js
  2
 ```
@@ -69,13 +69,13 @@ nodejs包管理器
 ##Grunt
 ###安装Command-line interface(CLI)
 
-```
+```bash
 $npm install -g grunt-cli
 ```
 
 在项目中使用grunt之前,我们先安装grunt
 
-```
+```bash
 $cd my-project
 $npm install grunt
 ```
@@ -92,7 +92,7 @@ $npm install grunt
 - package.json
 包描述文件,包含模块所有的元数据:名字,版本,描述,作者
 
-```
+```bash
 >npm init
 This utility will walk you through creating a package.json file.
 It only covers the most common items, and tries to guess sane defaults.
