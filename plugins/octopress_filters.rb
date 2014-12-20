@@ -10,7 +10,7 @@ module OctopressFilters
   def self.pre_filter(page)
     if page.ext.match('html|textile|markdown|md|haml|slim|xml')
       input = BacktickCodeBlock::render_code_block(page.content)
-      page.content = input.to_s.gsub /(<figure.+?>.+?<\/figure>)/m do
+      page.content = input.gsub /(<figure.+?>.+?<\/figure>)/m do
         TemplateWrapper::safe_wrap($1)
       end
     end
@@ -79,13 +79,13 @@ module OctopressLiquidFilters
 
   # Escapes CDATA sections in post content
   def cdata_escape(input)
-    input.to_s.gsub(/<!\[CDATA\[/, '&lt;![CDATA[').to_s.gsub(/\]\]>/, ']]&gt;')
+    input.gsub(/<!\[CDATA\[/, '&lt;![CDATA[').gsub(/\]\]>/, ']]&gt;')
   end
 
   # Replaces relative urls with full urls
   def expand_urls(input, url='')
     url ||= '/'
-    input.to_s.gsub /(\s+(href|src)\s*=\s*["|']{1})(\/[^\/>]{1}[^\"'>]*)/ do
+    input.gsub /(\s+(href|src)\s*=\s*["|']{1})(\/[^\/>]{1}[^\"'>]*)/ do
       $1+url+$3
     end
   end
@@ -114,7 +114,7 @@ module OctopressLiquidFilters
 
   # Condenses multiple spaces and tabs into a single space
   def condense_spaces(input)
-    input.to_s.gsub(/\s{2,}/, ' ')
+    input.gsub(/\s{2,}/, ' ')
   end
 
   # Removes trailing forward slash from a string for easily appending url segments
@@ -127,7 +127,7 @@ module OctopressLiquidFilters
 
   # Returns a url without the protocol (http://)
   def shorthand_url(input)
-    input.to_s.gsub /(https?:\/\/)(\S+)/ do
+    input.gsub /(https?:\/\/)(\S+)/ do
       $2
     end
   end
