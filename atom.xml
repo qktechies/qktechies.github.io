@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[qkong的奇数博客]]></title>
+  <title><![CDATA[qkong的技术博客]]></title>
   <link href="http://qktechies.github.io/atom.xml" rel="self"/>
   <link href="http://qktechies.github.io/"/>
-  <updated>2014-12-20T10:44:09+08:00</updated>
+  <updated>2014-12-20T10:55:07+08:00</updated>
   <id>http://qktechies.github.io/</id>
   <author>
     <name><![CDATA[qktechies]]></name>
