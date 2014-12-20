@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://qktechies.github.io/sitemap.xml 
