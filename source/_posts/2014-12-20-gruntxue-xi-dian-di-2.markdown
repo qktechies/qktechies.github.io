@@ -264,7 +264,7 @@ npm install grunt-contrib-jade --save-dev
 
 ```javascript
 module.exports = function(grunt) {
-	//加载coffee模块
+	//加载jade模块
 	grunt.loadNpmTasks('grunt-contrib-jade');
 
 	// Project configuration.
