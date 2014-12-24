@@ -4,7 +4,7 @@
   <title><![CDATA[qkong的技术博客]]></title>
   <link href="http://qktechies.github.io/atom.xml" rel="self"/>
   <link href="http://qktechies.github.io/"/>
-  <updated>2014-12-20T15:45:55+08:00</updated>
+  <updated>2014-12-20T18:31:52+08:00</updated>
   <id>http://qktechies.github.io/</id>
   <author>
     <name><![CDATA[qktechies]]></name>
@@ -12,6 +12,498 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Grunt学习点滴2]]></title>
+    <link href="http://qktechies.github.io/blog/2014/12/20/gruntxue-xi-dian-di-2/"/>
+    <updated>2014-12-20T16:43:56+08:00</updated>
+    <id>http://qktechies.github.io/blog/2014/12/20/gruntxue-xi-dian-di-2</id>
+    <content type="html"><![CDATA[<h1>Grunt实战</h1>
+
+<h2>简单样例</h2>
+
+<ol>
+<li>简单注册一个foo的任务</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//注册一个foo的任务</span>
+</span><span class='line'>     <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>       <span class="nx">grunt</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">writeln</span><span class="p">(</span><span class="s1">&#39;foo is running...&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行命令grunt foo就可以执行foo任务</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$grunt</span> foo
+</span><span class='line'>Running <span class="s2">&quot;foo&quot;</span> task
+</span><span class='line'>foo is running...
+</span><span class='line'>
+</span><span class='line'>Done, without errors.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.注册多个任务</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//注册一个foo1的任务</span>
+</span><span class='line'>     <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;foo1&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>       <span class="nx">grunt</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">writeln</span><span class="p">(</span><span class="s1">&#39;foo1 is running...&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>  
+</span><span class='line'>    <span class="c1">//注册一个foo2的任务</span>
+</span><span class='line'>    <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;foo2&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>       <span class="nx">grunt</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">writeln</span><span class="p">(</span><span class="s1">&#39;foo1 is running...&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>  
+</span><span class='line'>    <span class="c1">//默认grunt执行default任务</span>
+</span><span class='line'>    <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;foo1&#39;</span><span class="p">,</span><span class="s1">&#39;foo2&#39;</span><span class="p">]);</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行default任务:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//default默认任务 可以省略</span>
+</span><span class='line'><span class="o">&gt;</span><span class="nx">grunt</span>
+</span><span class='line'><span class="nx">Running</span> <span class="s2">&quot;foo1&quot;</span> <span class="nx">task</span>
+</span><span class='line'><span class="nx">foo1</span> <span class="nx">is</span> <span class="nx">running</span><span class="p">...</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Running</span> <span class="s2">&quot;foo2&quot;</span> <span class="nx">task</span>
+</span><span class='line'><span class="nx">foo1</span> <span class="nx">is</span> <span class="nx">running</span><span class="p">...</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Done</span><span class="p">,</span> <span class="nx">without</span> <span class="nx">errors</span><span class="p">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>初始化变量和获取变量的值</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">){</span>
+</span><span class='line'>  <span class="c1">//初始化任务bar中的变量foo</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span class='line'>      <span class="nx">bar</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">foo</span><span class="o">:</span> <span class="mi">42</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">})</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>      <span class="c1">//获取变量bar {foo:42}</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">bar</span> <span class="o">=</span> <span class="nx">grunt</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">bazz</span> <span class="o">=</span> <span class="nx">bar</span><span class="p">.</span><span class="nx">foo</span> <span class="o">+</span><span class="mi">7</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">grunt</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">writeln</span><span class="p">(</span><span class="s1">&#39;Bazz is&#39;</span> <span class="o">+</span> <span class="nx">bazz</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">})</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行结果:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>grunt bar
+</span><span class='line'>Running <span class="s2">&quot;bar&quot;</span> task
+</span><span class='line'>Bazz is 49
+</span><span class='line'>
+</span><span class='line'>Done, without errors.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>查找bug和样式错误</h2>
+
+<p>JSHint是一个javascript代码验证工具</p>
+
+<p>测试环境目录</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="p">|</span>___my-project
+</span><span class='line'>  <span class="p">|</span>__node_modules
+</span><span class='line'>  <span class="p">|</span>    <span class="p">|</span>__grunt
+</span><span class='line'>  <span class="p">|</span>    <span class="p">|</span>__grunt-contrib-jshint
+</span><span class='line'>  <span class="p">|</span>__src
+</span><span class='line'>  <span class="p">|</span>    <span class="p">|</span>__foo.js
+</span><span class='line'>  <span class="p">|</span>__Gruntfile.js
+</span><span class='line'>  <span class="p">|</span>__package.json
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装JSHint工具</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>npm install grunt-contrib-jshint --save-dev
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>测试代码</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//Gruntfile.js</span>
+</span><span class='line'><span class="c1">//参数curly:必须用括号包裹 不能写这种代码while (notEnd())</span>
+</span><span class='line'><span class="c1">//doSomething();</span>
+</span><span class='line'><span class="c1">//参数eqeqeq: 对于简单类型，使用===和!==，而不是==和!=</span>
+</span><span class='line'> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">//加载jshint模块</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-contrib-jshint&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Project configuration.</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span class='line'>      <span class="nx">jshint</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>              <span class="nx">curly</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>              <span class="nx">eqeqeq</span><span class="o">:</span> <span class="kc">true</span>
+</span><span class='line'>          <span class="p">},</span>
+</span><span class='line'>          <span class="nx">all</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;src/**/*.js&#39;</span><span class="p">]</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>  <span class="c1">// Define the default task</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;jshint&#39;</span><span class="p">]);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//foo.js</span>
+</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="mi">7</span> <span class="o">==</span> <span class="s2">&quot;7&quot;</span><span class="p">)</span> <span class="nx">alert</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>测试结果</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&gt;grunt
+</span><span class='line'>Running <span class="s2">&quot;jshint:all&quot;</span> <span class="o">(</span>jshint<span class="o">)</span> task
+</span><span class='line'>
+</span><span class='line'>   src/foo.js
+</span><span class='line'>      <span class="m">1</span> <span class="p">|</span> <span class="k">if</span><span class="o">(</span><span class="nv">7</span> <span class="o">==</span> <span class="s2">&quot;7&quot;</span><span class="o">)</span> alert<span class="o">(</span>42<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>                 ^ Expected <span class="s1">&#39;===&#39;</span> and instead saw <span class="s1">&#39;==&#39;</span>.
+</span><span class='line'>      <span class="m">1</span> <span class="p">|</span> <span class="k">if</span><span class="o">(</span><span class="nv">7</span> <span class="o">==</span> <span class="s2">&quot;7&quot;</span><span class="o">)</span> alert<span class="o">(</span>42<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>                       ^ Expected <span class="s1">&#39;{&#39;</span> and instead saw <span class="s1">&#39;alert&#39;</span>.
+</span><span class='line'>
+</span><span class='line'>&gt;&gt; <span class="m">2</span> errors in <span class="m">1</span> file
+</span><span class='line'>Warning: Task <span class="s2">&quot;jshint:all&quot;</span> failed. Use --force to <span class="k">continue</span>.
+</span><span class='line'>
+</span><span class='line'>Aborted due to warnings.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>修改foo.js为</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span><span class="p">(</span><span class="mi">7</span> <span class="o">===</span> <span class="s1">&#39;7&#39;</span><span class="p">){</span>
+</span><span class='line'>  <span class="nx">alert</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行结果</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&gt;grunt
+</span><span class='line'>Running <span class="s2">&quot;jshint:all&quot;</span> <span class="o">(</span>jshint<span class="o">)</span> task
+</span><span class='line'>&gt;&gt; <span class="m">1</span> file lint free.
+</span><span class='line'>
+</span><span class='line'>Done, without errors.
+</span><span class='line'>//没有错误
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Transcompilation</h2>
+
+<p>像Dart、CoffeeScript、TypeScript 和 JavaScript都能翻译成javascript语言,grunt可以简单配置自动翻译</p>
+
+<h3>Coffeescript&ndash;>Javascript</h3>
+
+<p>测试环境目录</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="p">|</span>___my-project
+</span><span class='line'>  <span class="p">|</span>__node_modules
+</span><span class='line'>  <span class="p">|</span>    <span class="p">|</span>__grunt
+</span><span class='line'>  <span class="p">|</span>    <span class="p">|</span>__grunt-contrib-coffee
+</span><span class='line'>  <span class="p">|</span>__src
+</span><span class='line'>  <span class="p">|</span>    <span class="p">|</span>__demo.coffee
+</span><span class='line'>  <span class="p">|</span>__Gruntfile.js
+</span><span class='line'>  <span class="p">|</span>__package.json
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装grunt-contrib-coffee</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>npm install grunt-contrib-coffee --save-dev
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>测试代码</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">//加载coffee模块</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-contrib-coffee&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Project configuration.</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span class='line'>      <span class="nx">coffee</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">compile</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>              <span class="nx">files</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                  <span class="s1">&#39;src/demo.js&#39;</span><span class="o">:</span> <span class="s1">&#39;src/demo.coffee&#39;</span>
+</span><span class='line'>              <span class="p">}</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>  <span class="c1">// Define the default task</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;coffee&#39;</span><span class="p">]);</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行结果:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//结果显示自动创建文件src/demo.js</span>
+</span><span class='line'><span class="o">&gt;</span><span class="nx">grunt</span>
+</span><span class='line'><span class="nx">Running</span> <span class="s2">&quot;coffee:compile&quot;</span> <span class="p">(</span><span class="nx">coffee</span><span class="p">)</span> <span class="nx">task</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="nx">files</span> <span class="nx">created</span><span class="p">.</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Done</span><span class="p">,</span> <span class="nx">without</span> <span class="nx">errors</span><span class="p">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Jade&ndash;>Html</h3>
+
+<p>测试环境目录</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">|</span><span class="nx">___my</span><span class="o">-</span><span class="nx">project</span>
+</span><span class='line'>  <span class="o">|</span><span class="nx">__node_modules</span>
+</span><span class='line'>  <span class="o">|</span>    <span class="o">|</span><span class="nx">__grunt</span>
+</span><span class='line'>  <span class="o">|</span>    <span class="o">|</span><span class="nx">__grunt</span><span class="o">-</span><span class="nx">contrib</span><span class="o">-</span><span class="nx">jade</span>
+</span><span class='line'>  <span class="o">|</span><span class="nx">__src</span>
+</span><span class='line'>  <span class="o">|</span>    <span class="o">|</span><span class="nx">__demo</span><span class="p">.</span><span class="nx">jade</span>  
+</span><span class='line'>  <span class="o">|</span><span class="nx">__Gruntfile</span><span class="p">.</span><span class="nx">js</span>
+</span><span class='line'>  <span class="o">|</span><span class="nx">__package</span><span class="p">.</span><span class="nx">json</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装grunt-contrib-jade</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>npm install grunt-contrib-jade --save-dev
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>测试代码</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">//加载coffee模块</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-contrib-jade&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Project configuration.</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span class='line'>      <span class="nx">jade</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">compile</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>              <span class="nx">files</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                  <span class="s1">&#39;src/demo.html&#39;</span><span class="o">:</span> <span class="s1">&#39;src/demo.jade&#39;</span>
+</span><span class='line'>              <span class="p">}</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>  <span class="c1">// Define the default task</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;jade&#39;</span><span class="p">]);</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行结果:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//结果显示自动创建文件src/demo.js</span>
+</span><span class='line'><span class="o">&gt;</span><span class="nx">grunt</span>
+</span><span class='line'><span class="nx">Running</span> <span class="s2">&quot;jade:target1&quot;</span> <span class="p">(</span><span class="nx">jade</span><span class="p">)</span> <span class="nx">task</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="nx">file</span> <span class="nx">created</span><span class="p">.</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Done</span><span class="p">,</span> <span class="nx">without</span> <span class="nx">errors</span><span class="p">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Stylus&ndash;>CSS
+Haml,Sass,Less等等</p>
+
+<h3>Minification(代码压缩)</h3>
+
+<p>为了提高网站性能和用户访问速度</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Grunt学习点滴1]]></title>
@@ -28,16 +520,17 @@
 
 <p>查看是否安装成功:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$node --version
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$node</span> --version
 </span><span class='line'>v0.10.33
 </span><span class='line'>
-</span><span class='line'>$npm --version
-</span><span class='line'>1.4.28</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="nv">$npm</span> --version
+</span><span class='line'>1.4.28
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>Modules</h3>
@@ -252,10 +745,13 @@ npm install(后面不跟包名)上,npm会查询当前目录下的package.json并
 
 <h4>version版本</h4>
 
-<p>版本格式MAJOR.MINOR.PATCH 例如&#8221;version&#8221;: &ldquo;1.0.0&rdquo;
-MAJOR 不兼容的API发布
-MINOR 向后兼容的功能发布
-PATCH 向后兼容的bug修复</p>
+<p>版本格式MAJOR.MINOR.PATCH 例如&#8221;version&#8221;: &ldquo;1.0.0&rdquo;</p>
+
+<p>MAJOR 不兼容的API发布</p>
+
+<p>MINOR 向后兼容的功能发布</p>
+
+<p>PATCH 向后兼容的bug修复</p>
 
 <ul>
 <li>Gruntfile.js</li>
@@ -265,18 +761,16 @@ PATCH 向后兼容的bug修复</p>
 <p>npm是寻找当前目录的package.json
 而grunt是寻找当前目录下的Gruntfile.js</p>
 
-<p>内部代码都类似:</p>
-
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>   <span class="c1">// Do grunt-related things in here</span>
+</span><span class='line'>   <span class="c1">// grunt相关任务放在这</span>
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-
+<p>接下来就是熟悉Grunt的API了</p>
 ]]></content>
   </entry>
   

@@ -100,16 +100,17 @@ v0.10.33 $npm -- &hellip;">
 
 <p>查看是否安装成功:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$node --version
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$node</span> --version
 </span><span class='line'>v0.10.33
 </span><span class='line'>
-</span><span class='line'>$npm --version
-</span><span class='line'>1.4.28</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="nv">$npm</span> --version
+</span><span class='line'>1.4.28
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>Modules</h3>
@@ -324,10 +325,13 @@ npm install(后面不跟包名)上,npm会查询当前目录下的package.json并
 
 <h4>version版本</h4>
 
-<p>版本格式MAJOR.MINOR.PATCH 例如&#8221;version&#8221;: &ldquo;1.0.0&rdquo;
-MAJOR 不兼容的API发布
-MINOR 向后兼容的功能发布
-PATCH 向后兼容的bug修复</p>
+<p>版本格式MAJOR.MINOR.PATCH 例如&#8221;version&#8221;: &ldquo;1.0.0&rdquo;</p>
+
+<p>MAJOR 不兼容的API发布</p>
+
+<p>MINOR 向后兼容的功能发布</p>
+
+<p>PATCH 向后兼容的bug修复</p>
 
 <ul>
 <li>Gruntfile.js</li>
@@ -337,18 +341,16 @@ PATCH 向后兼容的bug修复</p>
 <p>npm是寻找当前目录的package.json
 而grunt是寻找当前目录下的Gruntfile.js</p>
 
-<p>内部代码都类似:</p>
-
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>   <span class="c1">// Do grunt-related things in here</span>
+</span><span class='line'>   <span class="c1">// grunt相关任务放在这</span>
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-
+<p>接下来就是熟悉Grunt的API了</p>
 </div>
 
 
@@ -411,6 +413,8 @@ var duoshuoQuery = {short_name:"qktechies"};
     <p class="meta">
       
       
+        <a class="basic-alignment right" href="/blog/2014/12/20/gruntxue-xi-dian-di-2/" title="Next Post: Grunt学习点滴2">Grunt学习点滴2 &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -422,6 +426,10 @@ var duoshuoQuery = {short_name:"qktechies"};
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/12/20/gruntxue-xi-dian-di-2/">Grunt学习点滴2</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/12/20/gruntxue-xi-dian-di-1/">Grunt学习点滴1</a>

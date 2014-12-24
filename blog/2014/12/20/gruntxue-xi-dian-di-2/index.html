@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>qkong的技术博客</title>
+  <title>Grunt学习点滴2 - qkong的技术博客</title>
   <meta name="author" content="qktechies">
 
   
@@ -24,7 +24,7 @@ module.exports = function(grunt) { //注册一个foo的任务 grunt.registerTask
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://qktechies.github.io">
+  <link rel="canonical" href="http://qktechies.github.io/blog/2014/12/20/gruntxue-xi-dian-di-2">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="qkong的技术博客" type="application/atom+xml">
@@ -69,15 +69,12 @@ module.exports = function(grunt) { //注册一个foo的任务 grunt.registerTask
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/12/20/gruntxue-xi-dian-di-2/">Grunt学习点滴2</a></h1>
+      <h1 class="entry-title">Grunt学习点滴2</h1>
     
     
       <p class="meta">
@@ -93,7 +90,7 @@ module.exports = function(grunt) { //注册一个foo的任务 grunt.registerTask
   </header>
 
 
-  <div class="entry-content"><h1>Grunt实战</h1>
+<div class="entry-content"><h1>Grunt实战</h1>
 
 <h2>简单样例</h2>
 
@@ -578,307 +575,75 @@ Haml,Sass,Less等等</p>
 
 <p>为了提高网站性能和用户访问速度</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">qktechies</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-12-20T16:43:56+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>4:43 pm</span></time>
+      
+
+
+    </p>
     
-      <h1 class="entry-title"><a href="/blog/2014/12/20/gruntxue-xi-dian-di-1/">Grunt学习点滴1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-12-20T12:10:49+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:10 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>Grunt是基于nodejs的javascript命令行工具</h1>
-
-<h2>在学习grunt之前必须知道:</h2>
-
-<h3>nodejs</h3>
-
-<p>官网下载安装<a href="http://www.nodejs.org/download/">http://www.nodejs.org/download/</a></p>
-
-<p>查看是否安装成功:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$node</span> --version
-</span><span class='line'>v0.10.33
-</span><span class='line'>
-</span><span class='line'><span class="nv">$npm</span> --version
-</span><span class='line'>1.4.28
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Modules</h3>
-
-<p>nodejs模块化是CommonJS规范的实现,因为原生的javascript没有这个特性,相当于JAVA中的import</p>
-
-<p>Commonjs的说明:<a href="http://wiki.commonjs.org/wiki/CommonJS">http://wiki.commonjs.org/wiki/CommonJS</a></p>
-
-<p>三个重要的说明:</p>
-
-<ul>
-<li><h4>module</h4>
-
-<p>一个代表模块本身的对象</p></li>
-<li><h4>exports</h4>
-
-<p>提供对外访问的接口,利用require可以得到exports对象</p></li>
-<li><h4>require</h4>
-
-<p>用于import模块,返回exports对象</p></li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//三个文件index.js,increment.js,math.js</span>
-</span><span class='line'><span class="c1">//program.js</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">inc</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./increment&#39;</span><span class="p">).</span><span class="nx">increment</span><span class="p">;</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">inc</span><span class="p">(</span><span class="nx">a</span><span class="p">));</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//increment.js</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">add</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./math&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">exports</span><span class="p">.</span><span class="nx">increment</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>       <span class="k">return</span> <span class="nx">add</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//math.js</span>
-</span><span class='line'><span class="nx">exports</span><span class="p">.</span><span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>       <span class="k">return</span> <span class="nx">c</span> <span class="o">+</span> <span class="nx">d</span><span class="p">;</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>increment.js对外提供increment接口,通过调用math中add接口实现自增1</p>
-
-<p>math.js对外提供add接口</p>
-
-<p>运行结果:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$node</span> program.js
-</span><span class='line'> 2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>CommonJS利用了计算机科学抽象的思想,例如increment.js调用math.js中的add接口时,不需要知道add的实现细节,只需要写math.js的人告诉它:add接口实现了两个数相加的方法</p>
-
-<p>这样我们可以把实现特定方法的函数写在多个模块文件中,提高代码复用率</p>
-
-<h3>npm(Node Package Manager)</h3>
-
-<p>nodejs包管理器</p>
-
-<h2>Grunt</h2>
-
-<h3>安装Command-line interface(CLI)</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$npm</span> install -g grunt-cli
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在项目中使用grunt之前,我们先安装grunt</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$cd</span> my-project
-</span><span class='line'><span class="nv">$npm</span> install grunt
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>项目环境设置</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="p">|</span>___my-project
-</span><span class='line'>  <span class="p">|</span>__node_modules
-</span><span class='line'>  <span class="p">|</span>    <span class="p">|</span>__grunt
-</span><span class='line'>  <span class="p">|</span>__Gruntfile.js
-</span><span class='line'>  <span class="p">|</span>__package.json
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>package.json
-包描述文件,包含模块所有的元数据:名字,版本,描述,作者</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&gt;npm init
-</span><span class='line'>This utility will walk you through creating a package.json file.
-</span><span class='line'>It only covers the most common items, and tries to guess sane defaults.
-</span><span class='line'>
-</span><span class='line'>See <span class="sb">`</span>npm <span class="nb">help </span>json<span class="sb">`</span> <span class="k">for</span> definitive documentation on these fields
-</span><span class='line'>and exactly what they <span class="k">do</span>.
-</span><span class='line'>
-</span><span class='line'>Use <span class="sb">`</span>npm install &lt;pkg&gt; --save<span class="sb">`</span> afterwards to install a package and
-</span><span class='line'>save it as a dependency in the package.json file.
-</span><span class='line'>
-</span><span class='line'>Press ^C at any <span class="nb">time </span>to quit.
-</span><span class='line'>name: <span class="o">(</span>my-project<span class="o">)</span>
-</span><span class='line'>version: <span class="o">(</span>1.0.0<span class="o">)</span>
-</span><span class='line'>description: my-project demo
-</span><span class='line'>entry point: <span class="o">(</span>Gruntfile.js<span class="o">)</span>
-</span><span class='line'><span class="nb">test command</span>:
-</span><span class='line'>git repository:
-</span><span class='line'>keywords:
-</span><span class='line'>author:
-</span><span class='line'>license: <span class="o">(</span>ISC<span class="o">)</span>
-</span><span class='line'>About to write to /Users/qkong/Documents/demo_code/my-project/package.json:
-</span><span class='line'>
-</span><span class='line'><span class="o">{</span>
-</span><span class='line'>  <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;my-project&quot;</span>,
-</span><span class='line'>  <span class="s2">&quot;version&quot;</span>: <span class="s2">&quot;1.0.0&quot;</span>,
-</span><span class='line'>  <span class="s2">&quot;description&quot;</span>: <span class="s2">&quot;my-project demo&quot;</span>,
-</span><span class='line'>  <span class="s2">&quot;main&quot;</span>: <span class="s2">&quot;Gruntfile.js&quot;</span>,
-</span><span class='line'>  <span class="s2">&quot;dependencies&quot;</span>: <span class="o">{</span>
-</span><span class='line'>    <span class="s2">&quot;grunt&quot;</span>: <span class="s2">&quot;^0.4.5&quot;</span>
-</span><span class='line'>  <span class="o">}</span>,
-</span><span class='line'>  <span class="s2">&quot;devDependencies&quot;</span>: <span class="o">{}</span>,
-</span><span class='line'>  <span class="s2">&quot;scripts&quot;</span>: <span class="o">{</span>
-</span><span class='line'>    <span class="s2">&quot;test&quot;</span>: <span class="s2">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
-</span><span class='line'>  <span class="o">}</span>,
-</span><span class='line'>  <span class="s2">&quot;author&quot;</span>: <span class="s2">&quot;&quot;</span>,
-</span><span class='line'>  <span class="s2">&quot;license&quot;</span>: <span class="s2">&quot;ISC&quot;</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>dependencies属性</h4>
-
-<p>一般github是不会上传node_modules的文件,我们必须安装所需的包,运行
-npm install(后面不跟包名)上,npm会查询当前目录下的package.json并解析它,所有在dependencies的包都会被安装,</p>
-
-<p>npm install grunt &ndash;save会自动加入dependencies的版本信息</p>
-
-<p>npm install grunt &ndash;save-dev会自动加入devDependencies的版本信息</p>
-
-<p>区别是:&ndash;save-dev一般用于测试框架mocha等等,一般部署到服务器上时,不带有node_modules文件夹,可能有模块不同系统不兼容的问题,所以需要npm install安装所有dependencies中包括的所有包信息,而devDependencies只是用于平时开发测试,服务器上是不需要的</p>
-
-<h4>version版本</h4>
-
-<p>版本格式MAJOR.MINOR.PATCH 例如&#8221;version&#8221;: &ldquo;1.0.0&rdquo;</p>
-
-<p>MAJOR 不兼容的API发布</p>
-
-<p>MINOR 向后兼容的功能发布</p>
-
-<p>PATCH 向后兼容的bug修复</p>
-
-<ul>
-<li>Gruntfile.js</li>
-</ul>
-
-
-<p>npm是寻找当前目录的package.json
-而grunt是寻找当前目录下的Gruntfile.js</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>   <span class="c1">// grunt相关任务放在这</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>接下来就是熟悉Grunt的API了</p>
+      <div class="sharing">
+  
+  
+  
+  
+   <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
 </div>
-  
-  
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
 
-
-    </article>
+<!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="/blog/2014/12/20/gruntxue-xi-dian-di-2" data-title="Grunt学习点滴2" data-url="http://qktechies.github.io/blog/2014/12/20/gruntxue-xi-dian-di-2/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"qktechies"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!-- 多说公共JS代码 end -->
   
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/12/20/gruntxue-xi-dian-di-1/" title="Previous Post: Grunt学习点滴1">&laquo; Grunt学习点滴1</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -902,6 +667,7 @@ npm install(后面不跟包名)上,npm会查询当前目录下的package.json并
 
   
 </aside>
+
 
     </div>
   </div>
