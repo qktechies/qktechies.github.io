@@ -506,7 +506,7 @@ Done, without errors.
 	|	|__build1.js
 	|	|__build2
 	|		|___build3.js
-	|__.ftppass
+	|__secret.json
 	|__Gruntfile.js
 	|__package.json
 	
@@ -521,7 +521,6 @@ npm install grunt-ssh --save-dev
 测试代码
 
 ```javascript
-//Gruntfile.js
 module.exports = function(grunt) {
     //加载sftp模块
     grunt.loadNpmTasks('grunt-ssh');
@@ -534,18 +533,20 @@ module.exports = function(grunt) {
                 host: '<%= secret.host %>',
                 username: '<%= secret.username %>',
                 password: '<%= secret.password %>',
-                path: '服务器路径',
+                path: '/home/jinlei/sftp',
                 showProgress: true,
-                srcBasePath: '本地复制的文件家路径(build/)'
+                srcBasePath: 'build/',
+                createDirectories: true //自动创建文件夹
             },
             files: {
-                src: "复制的文件(build/)"
+                src: ["build/**"]
             }
         }
     });
     // Define the default task
     grunt.registerTask('default', ['sftp']);
 };
+
 
 //secret.json
 {
@@ -560,13 +561,10 @@ module.exports = function(grunt) {
 ```
 //结果显示自动创建文件夹和文件
 >grunt
-Running "ftp-deploy:build" (ftp-deploy) task
->> New remote folder created /home/trip/ftpDemo/
->> New remote folder created /home/trip/ftpDemo/build2
->> FTP upload done!
+Running "sftp:files" (sftp) task
+Created 2 directories, copied 2 files
 
 Done, without errors.
-
 ```
 
 
