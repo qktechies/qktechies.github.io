@@ -914,7 +914,7 @@ Haml,Sass,Less等等</p>
 </span><span class='line'>  <span class="o">|</span>    <span class="o">|</span><span class="nx">__build1</span><span class="p">.</span><span class="nx">js</span>
 </span><span class='line'>  <span class="o">|</span>    <span class="o">|</span><span class="nx">__build2</span>
 </span><span class='line'>  <span class="o">|</span>        <span class="o">|</span><span class="nx">___build3</span><span class="p">.</span><span class="nx">js</span>
-</span><span class='line'>  <span class="o">|</span><span class="nx">__</span><span class="p">.</span><span class="nx">ftppass</span>
+</span><span class='line'>  <span class="o">|</span><span class="nx">__secret</span><span class="p">.</span><span class="nx">json</span>
 </span><span class='line'>  <span class="o">|</span><span class="nx">__Gruntfile</span><span class="p">.</span><span class="nx">js</span>
 </span><span class='line'>  <span class="o">|</span><span class="nx">__package</span><span class="p">.</span><span class="nx">json</span>
 </span><span class='line'>  
@@ -962,8 +962,8 @@ Haml,Sass,Less等等</p>
 <span class='line-number'>30</span>
 <span class='line-number'>31</span>
 <span class='line-number'>32</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//Gruntfile.js</span>
-</span><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'>    <span class="c1">//加载sftp模块</span>
 </span><span class='line'>    <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-ssh&#39;</span><span class="p">);</span>
 </span><span class='line'>
@@ -975,18 +975,20 @@ Haml,Sass,Less等等</p>
 </span><span class='line'>                <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;&lt;%= secret.host %&gt;&#39;</span><span class="p">,</span>
 </span><span class='line'>                <span class="nx">username</span><span class="o">:</span> <span class="s1">&#39;&lt;%= secret.username %&gt;&#39;</span><span class="p">,</span>
 </span><span class='line'>                <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;&lt;%= secret.password %&gt;&#39;</span><span class="p">,</span>
-</span><span class='line'>                <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;服务器路径&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/home/jinlei/sftp&#39;</span><span class="p">,</span>
 </span><span class='line'>                <span class="nx">showProgress</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>                <span class="nx">srcBasePath</span><span class="o">:</span> <span class="s1">&#39;本地复制的文件家路径(build/)&#39;</span>
+</span><span class='line'>                <span class="nx">srcBasePath</span><span class="o">:</span> <span class="s1">&#39;build/&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">createDirectories</span><span class="o">:</span> <span class="kc">true</span> <span class="c1">//自动创建文件夹</span>
 </span><span class='line'>            <span class="p">},</span>
 </span><span class='line'>            <span class="nx">files</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">src</span><span class="o">:</span> <span class="s2">&quot;复制的文件(build/)&quot;</span>
+</span><span class='line'>                <span class="nx">src</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;build/**&quot;</span><span class="p">]</span>
 </span><span class='line'>            <span class="p">}</span>
 </span><span class='line'>        <span class="p">}</span>
 </span><span class='line'>    <span class="p">});</span>
 </span><span class='line'>    <span class="c1">// Define the default task</span>
 </span><span class='line'>    <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;sftp&#39;</span><span class="p">]);</span>
 </span><span class='line'><span class="p">};</span>
+</span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="c1">//secret.json</span>
 </span><span class='line'><span class="p">{</span>
@@ -1005,14 +1007,10 @@ Haml,Sass,Less等等</p>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//结果显示自动创建文件夹和文件</span>
 </span><span class='line'><span class="o">&gt;</span><span class="nx">grunt</span>
-</span><span class='line'><span class="nx">Running</span> <span class="s2">&quot;ftp-deploy:build&quot;</span> <span class="p">(</span><span class="nx">ftp</span><span class="o">-</span><span class="nx">deploy</span><span class="p">)</span> <span class="nx">task</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="nx">New</span> <span class="nx">remote</span> <span class="nx">folder</span> <span class="nx">created</span> <span class="o">/</span><span class="nx">home</span><span class="o">/</span><span class="nx">trip</span><span class="o">/</span><span class="nx">ftpDemo</span><span class="o">/</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="nx">New</span> <span class="nx">remote</span> <span class="nx">folder</span> <span class="nx">created</span> <span class="o">/</span><span class="nx">home</span><span class="o">/</span><span class="nx">trip</span><span class="o">/</span><span class="nx">ftpDemo</span><span class="o">/</span><span class="nx">build2</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="nx">FTP</span> <span class="nx">upload</span> <span class="nx">done</span><span class="o">!</span>
+</span><span class='line'><span class="nx">Running</span> <span class="s2">&quot;sftp:files&quot;</span> <span class="p">(</span><span class="nx">sftp</span><span class="p">)</span> <span class="nx">task</span>
+</span><span class='line'><span class="nx">Created</span> <span class="mi">2</span> <span class="nx">directories</span><span class="p">,</span> <span class="nx">copied</span> <span class="mi">2</span> <span class="nx">files</span>
 </span><span class='line'>
 </span><span class='line'><span class="nx">Done</span><span class="p">,</span> <span class="nx">without</span> <span class="nx">errors</span><span class="p">.</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -1117,7 +1115,7 @@ var duoshuoQuery = {short_name:"qktechies"};
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - qktechies -
+  Copyright &copy; 2015 - qktechies -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
