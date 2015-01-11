@@ -1,0 +1,81 @@
+---
+layout: post
+title: "ios学习"
+date: 2015-01-11 15:00:38 +0800
+comments: true
+categories: 
+---
+
+1. main.m文件和UIApplicationMain方法
+
+```objc
+@autoreleasepool {
+   return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+}
+```
+
+```text
+@autoreleasepool为应用提供了内存管理
+ARC(Automatic Reference Counting)使得内存管理自动跟踪对象
+
+UIApplicationMain为应用初始化两个重要的部件
+
+- UIApplication类实例(application object)
+  这个对象管理应用的event loop(事件轮回)和coordinates(坐标)
+  UIKit Framework中的类
+- AppDelegate类的一个实例(app delegate)
+
+app delegate创建一个window,你的app内容可以绘画在上面并且提供了状态转变的响应
+
+AppDelegate.h中有一个单一的属性:window
+@property (strong, nonatomic) UIWindow *window;
+有了这个属性,app delegate可以跟踪画板上绘画的内容
+
+AppDelegate.m有一些预定义的方法允许应用与app delete交流 例如:
+app lauch(app打开) 
+low-memory warning(低内存警告)
+app termination
+这些时候都会调用相应的方法
+didFinishLaunchingWithOptions
+applicationDidReceiveMemoryWarning applicationWillTerminate等方法
+
+2. View Hierarchy(视图层级关系)
+父视图-视图-子视图
+
+视图层级关系最顶端是window对象 UIWindow类的一个实例
+
+```
+
+![](https://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOS/Art/view_layer_objects_2x.png)
+
+在IOS App中,我们用view controller(UIViewController)管理层级视图的内容
+
+ViewController不属于层级视图一部分,不是视图的一部分
+它控制层级视图中的对象并提供他们行为
+
+3. Actions
+action是一小段链接到某个即将在app上发生的事件的代码,当事件触发时,代码就会被执行,你可以定义一个action去操控数据来更新界面
+
+```
+- (IBAction)restoreDefaults:(id)sender;
+```
+
+4. Outlets
+Outlets提供了一种引用界面对象的方法
+
+```
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+```
+5. Controls
+用户界面对象:Button, slider, switch
+control event:各种身体手势
+
+三种类型的control event:
+
+- touch and drage event
+- editing event
+- value-changed events
+
+6. Navigation Controllers
+app有超过一个层级视图,就需要在视图之间过度,转变
+UINavigationController stack(first out,last in)
