@@ -9,13 +9,15 @@
   <meta name="author" content="qktechies">
 
   
-  <meta name="description" content="Grunt实战 简单样例 简单注册一个foo的任务 1
+  <meta name="description" content="main.m文件和UIApplicationMain方法 1
+2
+3
+@autoreleasepool { return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+} 1
 2
 3
 4
-5
-6
-module.exports = function(grunt) { //注册一个foo的任务 grunt.registerTask(&#39;foo&#39;, function() { grunt.log. &hellip;">
+5 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +73,156 @@ module.exports = function(grunt) { //注册一个foo的任务 grunt.registerTask
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/11/iosxue-xi/">Ios学习</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-11T15:00:38+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:00 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ol>
+<li>main.m文件和UIApplicationMain方法</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@autoreleasepool</span> <span class="p">{</span>
+</span><span class='line'>   <span class="k">return</span> <span class="n">UIApplicationMain</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="nb">nil</span><span class="p">,</span> <span class="n">NSStringFromClass</span><span class="p">([</span><span class="n">AppDelegate</span> <span class="k">class</span><span class="p">]));</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>@autoreleasepool为应用提供了内存管理
+</span><span class='line'>ARC(Automatic Reference Counting)使得内存管理自动跟踪对象
+</span><span class='line'>
+</span><span class='line'>UIApplicationMain为应用初始化两个重要的部件
+</span><span class='line'>
+</span><span class='line'>- UIApplication类实例(application object)
+</span><span class='line'>  这个对象管理应用的event loop(事件轮回)和coordinates(坐标)
+</span><span class='line'>  UIKit Framework中的类
+</span><span class='line'>- AppDelegate类的一个实例(app delegate)
+</span><span class='line'>
+</span><span class='line'>app delegate创建一个window,你的app内容可以绘画在上面并且提供了状态转变的响应
+</span><span class='line'>
+</span><span class='line'>AppDelegate.h中有一个单一的属性:window
+</span><span class='line'>@property (strong, nonatomic) UIWindow *window;
+</span><span class='line'>有了这个属性,app delegate可以跟踪画板上绘画的内容
+</span><span class='line'>
+</span><span class='line'>AppDelegate.m有一些预定义的方法允许应用与app delete交流 例如:
+</span><span class='line'>app lauch(app打开)
+</span><span class='line'>low-memory warning(低内存警告)
+</span><span class='line'>app termination
+</span><span class='line'>这些时候都会调用相应的方法
+</span><span class='line'>didFinishLaunchingWithOptions
+</span><span class='line'>applicationDidReceiveMemoryWarning applicationWillTerminate等方法
+</span><span class='line'>
+</span><span class='line'>2. View Hierarchy(视图层级关系)
+</span><span class='line'>父视图-视图-子视图
+</span><span class='line'>
+</span><span class='line'>视图层级关系最顶端是window对象 UIWindow类的一个实例
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOS/Art/view_layer_objects_2x.png" alt="" /></p>
+
+<p>在IOS App中,我们用view controller(UIViewController)管理层级视图的内容</p>
+
+<p>ViewController不属于层级视图一部分,不是视图的一部分
+它控制层级视图中的对象并提供他们行为</p>
+
+<ol>
+<li>Actions
+action是一小段链接到某个即将在app上发生的事件的代码,当事件触发时,代码就会被执行,你可以定义一个action去操控数据来更新界面</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>- (IBAction)restoreDefaults:(id)sender;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Outlets
+Outlets提供了一种引用界面对象的方法</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>@property (weak, nonatomic) IBOutlet UITextField *textField;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Controls
+用户界面对象:Button, slider, switch
+control event:各种身体手势</li>
+</ol>
+
+
+<p>三种类型的control event:</p>
+
+<ul>
+<li>touch and drage event</li>
+<li>editing event</li>
+<li><p>value-changed events</p></li>
+<li><p>Navigation Controllers
+app有超过一个层级视图,就需要在视图之间过度,转变
+UINavigationController stack(first out,last in)</p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -917,7 +1069,7 @@ Haml,Sass,Less等等</p>
 </span><span class='line'>  <span class="o">|</span>    <span class="o">|</span><span class="nx">__build1</span><span class="p">.</span><span class="nx">js</span>
 </span><span class='line'>  <span class="o">|</span>    <span class="o">|</span><span class="nx">__build2</span>
 </span><span class='line'>  <span class="o">|</span>        <span class="o">|</span><span class="nx">___build3</span><span class="p">.</span><span class="nx">js</span>
-</span><span class='line'>  <span class="o">|</span><span class="nx">__</span><span class="p">.</span><span class="nx">ftppass</span>
+</span><span class='line'>  <span class="o">|</span><span class="nx">__secret</span><span class="p">.</span><span class="nx">json</span>
 </span><span class='line'>  <span class="o">|</span><span class="nx">__Gruntfile</span><span class="p">.</span><span class="nx">js</span>
 </span><span class='line'>  <span class="o">|</span><span class="nx">__package</span><span class="p">.</span><span class="nx">json</span>
 </span><span class='line'>  
@@ -965,8 +1117,8 @@ Haml,Sass,Less等等</p>
 <span class='line-number'>30</span>
 <span class='line-number'>31</span>
 <span class='line-number'>32</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//Gruntfile.js</span>
-</span><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'>    <span class="c1">//加载sftp模块</span>
 </span><span class='line'>    <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-ssh&#39;</span><span class="p">);</span>
 </span><span class='line'>
@@ -978,18 +1130,20 @@ Haml,Sass,Less等等</p>
 </span><span class='line'>                <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;&lt;%= secret.host %&gt;&#39;</span><span class="p">,</span>
 </span><span class='line'>                <span class="nx">username</span><span class="o">:</span> <span class="s1">&#39;&lt;%= secret.username %&gt;&#39;</span><span class="p">,</span>
 </span><span class='line'>                <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;&lt;%= secret.password %&gt;&#39;</span><span class="p">,</span>
-</span><span class='line'>                <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;服务器路径&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/home/jinlei/sftp&#39;</span><span class="p">,</span>
 </span><span class='line'>                <span class="nx">showProgress</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>                <span class="nx">srcBasePath</span><span class="o">:</span> <span class="s1">&#39;本地复制的文件家路径(build/)&#39;</span>
+</span><span class='line'>                <span class="nx">srcBasePath</span><span class="o">:</span> <span class="s1">&#39;build/&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">createDirectories</span><span class="o">:</span> <span class="kc">true</span> <span class="c1">//自动创建文件夹</span>
 </span><span class='line'>            <span class="p">},</span>
 </span><span class='line'>            <span class="nx">files</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">src</span><span class="o">:</span> <span class="s2">&quot;复制的文件(build/)&quot;</span>
+</span><span class='line'>                <span class="nx">src</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;build/**&quot;</span><span class="p">]</span>
 </span><span class='line'>            <span class="p">}</span>
 </span><span class='line'>        <span class="p">}</span>
 </span><span class='line'>    <span class="p">});</span>
 </span><span class='line'>    <span class="c1">// Define the default task</span>
 </span><span class='line'>    <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;sftp&#39;</span><span class="p">]);</span>
 </span><span class='line'><span class="p">};</span>
+</span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="c1">//secret.json</span>
 </span><span class='line'><span class="p">{</span>
@@ -1008,14 +1162,10 @@ Haml,Sass,Less等等</p>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//结果显示自动创建文件夹和文件</span>
 </span><span class='line'><span class="o">&gt;</span><span class="nx">grunt</span>
-</span><span class='line'><span class="nx">Running</span> <span class="s2">&quot;ftp-deploy:build&quot;</span> <span class="p">(</span><span class="nx">ftp</span><span class="o">-</span><span class="nx">deploy</span><span class="p">)</span> <span class="nx">task</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="nx">New</span> <span class="nx">remote</span> <span class="nx">folder</span> <span class="nx">created</span> <span class="o">/</span><span class="nx">home</span><span class="o">/</span><span class="nx">trip</span><span class="o">/</span><span class="nx">ftpDemo</span><span class="o">/</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="nx">New</span> <span class="nx">remote</span> <span class="nx">folder</span> <span class="nx">created</span> <span class="o">/</span><span class="nx">home</span><span class="o">/</span><span class="nx">trip</span><span class="o">/</span><span class="nx">ftpDemo</span><span class="o">/</span><span class="nx">build2</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="nx">FTP</span> <span class="nx">upload</span> <span class="nx">done</span><span class="o">!</span>
+</span><span class='line'><span class="nx">Running</span> <span class="s2">&quot;sftp:files&quot;</span> <span class="p">(</span><span class="nx">sftp</span><span class="p">)</span> <span class="nx">task</span>
+</span><span class='line'><span class="nx">Created</span> <span class="mi">2</span> <span class="nx">directories</span><span class="p">,</span> <span class="nx">copied</span> <span class="mi">2</span> <span class="nx">files</span>
 </span><span class='line'>
 </span><span class='line'><span class="nx">Done</span><span class="p">,</span> <span class="nx">without</span> <span class="nx">errors</span><span class="p">.</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -1331,6 +1481,10 @@ npm install(后面不跟包名)上,npm会查询当前目录下的package.json并
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/01/11/iosxue-xi/">Ios学习</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/12/20/gruntxue-xi-dian-di-2/">Grunt学习点滴2</a>
       </li>
     
@@ -1351,7 +1505,7 @@ npm install(后面不跟包名)上,npm会查询当前目录下的package.json并
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - qktechies -
+  Copyright &copy; 2015 - qktechies -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
