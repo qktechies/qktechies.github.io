@@ -4,7 +4,7 @@
   <title><![CDATA[qkong的技术博客]]></title>
   <link href="http://qktechies.github.io/atom.xml" rel="self"/>
   <link href="http://qktechies.github.io/"/>
-  <updated>2015-02-02T10:54:06+08:00</updated>
+  <updated>2015-02-02T11:06:29+08:00</updated>
   <id>http://qktechies.github.io/</id>
   <author>
     <name><![CDATA[qktechies]]></name>
@@ -956,16 +956,14 @@ execute可以获取文件inode号</p>
 
 <p>很多版本控制的方法就是把文件拷贝到另一个文件夹重命名,比如重命名为当前事件,这样就可以随意修改当前的文件夹,但是你很容易忘记版本中修改了哪些</p>
 
-<p><img src="http://qktechies.github.io/source/images/gitqi-bu1/localvcs.png" alt="" /></p>
-
-<p><img src="http://qktechies.github.io/source/images/search.png" alt="" /></p>
+<p><img src="http://qktechies.github.io/images/gitqi-bu1/localvcs.png" alt="" /></p>
 
 <h4>集中式版本控制系统</h4>
 
 <p>本地版本控制系统最主要的问题是难以在开发者之间合作,为了解决这个问题,集中式版本控制系统出现了(CVS Centralized Version Control System),例如Subversion</p>
 
 <p>客户端成员可以从中心服务器check out文件
-<img src="http://qktechies.github.io/source/images/gitqi-bu1/cvs.png" alt="" /></p>
+<img src="http://qktechies.github.io/images/gitqi-bu1/cvs.png" alt="" /></p>
 
 <p>缺点:
 如果CVS服务器宕机1小时,那么一小时之内就无法合作或保存版本修改,如果CVS服务器数据库坏了,你将失去工程的所有版本信息</p>
@@ -981,11 +979,13 @@ execute可以获取文件inode号</p>
 
 <p>git和其他VCS(Subversion..)最大的不同就是数据的思考方式</p>
 
-<p>其他VCS记录文件随事件的变化
-<img src="http://qktechies.github.io/source/images/gitqi-bu1/3.png" alt="" /></p>
+<p>其他VCS记录文件随事件的变化</p>
 
-<p>git记录数据当前的快照,储存数据为快照溜,如果文件没有变化,git就不会重新存储文件
-<img src="http://qktechies.github.io/source/images/gitqi-bu1/4.png" alt="" /></p>
+<p><img src="http://qktechies.github.io/images/gitqi-bu1/3.png" alt="" /></p>
+
+<p>git记录数据当前的快照,储存数据为快照溜,如果文件没有变化,git就不会重新存储文件</p>
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu1/4.png" alt="" /></p>
 
 <h4>大部分的操作都是本地的</h4>
 
@@ -1013,9 +1013,14 @@ execute可以获取文件inode号</p>
 <ul>
 <li>Committed 数据已经储存到本地数据库中</li>
 <li>Modified 文件被修改过但没有提交到本地数据库中</li>
-<li><p>Staged 已暂存表示把已修改的文件放在下次提交时要保存的清单中
-<img src="http://qktechies.github.io/source/images/gitqi-bu1/5.png" alt="" /></p></li>
-<li><p>.git文件夹存储了项目的元数据和对象数据库,git最重要的部分,每次从其他远程仓库上拷贝的数据就在.git中</p></li>
+<li>Staged 已暂存表示把已修改的文件放在下次提交时要保存的清单中</li>
+</ul>
+
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu1/5.png" alt="" /></p>
+
+<ul>
+<li>.git文件夹存储了项目的元数据和对象数据库,git最重要的部分,每次从其他远程仓库上拷贝的数据就在.git中</li>
 <li>working directory工作目录,项目文件的某个版本</li>
 <li>staging area:在Git目录下,储存这下一次commit的相关信息</li>
 </ul>
