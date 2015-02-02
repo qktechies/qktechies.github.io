@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>File and Directory Permissions - qkong的技术博客</title>
+  <meta name="author" content="qktechies">
+
+  
+  <meta name="description" content="users of file the owner(the process' UID matcheds the user of the file)
+the group(the process' GID is a member of the file&rsquo;s group)
+the other( &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://qktechies.github.io/blog/2015/01/26/file-and-directory-permissions">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="qkong的技术博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">qkong的技术博客</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:qktechies.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">File and Directory Permissions</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-26T10:05:44+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:05 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h4>users of file</h4>
+
+<ul>
+<li>the owner(the process&#8217; UID matcheds the user of the file)</li>
+<li>the group(the process&#8217; GID is a member of the file&rsquo;s group)</li>
+<li>the other(everyone else)</li>
+</ul>
+
+
+<h4>用户三种权限:</h4>
+
+<ul>
+<li>read</li>
+<li>write</li>
+<li>execute</li>
+</ul>
+
+
+<p>permissions assigned to a directory are not inherited by the files within that directory
+文件不继承上层目录的权限</p>
+
+<h4>目录权限:</h4>
+
+<ul>
+<li>read: list the files in a directory(ls)</li>
+<li>write: add a file to the directory, delete a file from a directory, rename a file</li>
+<li>execute: cd into it(make some directory your current working directory), access the &ldquo;inode&rdquo; information of the files within</li>
+</ul>
+
+
+<p>目录有两个属性:名字和inode号
+read可以获取文件名
+execute可以获取文件inode号</p>
+
+<p>&ldquo;cat /home/user/foo&#8221;需要文件foo的读权限
+只有你拥有/,/home,/home/user的搜索权限时,cat才能获取到foo文件的inode并且读取其中的内容,只有搜索到文件的inode才能读取其中的内容</p>
+
+<h4>细节</h4>
+
+<p>每个文件和目录有12个可设置的权限,意味着有2<sup>12</sup>=4096中可能的权限设置,12bits要么on要么off,每个权限可以独立被修改.</p>
+
+<p>文件权限和属性信息保存在文件inode中,只有文件的属主可以修改文件的inode例如permission和group.
+文件owner修改permission不需要任何权限
+只有root用户才能修改文件的owner</p>
+
+<p>permission没有赋予用户权利运行某些程序,而是赋予权利运行某些system call(UNIX API)
+例如:cat和more都使用了read() system call</p>
+
+<p>除了9位权限位(rwx for owner, group and others),还有三位:</p>
+
+<ul>
+<li>set User ID(SUID or setuid)</li>
+<li>set Group ID(SGID or setgid)</li>
+<li>sticky(or text) bit</li>
+</ul>
+
+
+<h4>Files</h4>
+
+<p>用户尝试使用unix命令例如cat读文件内容时,system call read()将会被调用并且&#8221;r&#8221; permission is required. 系统检查用户是不是属主并且属主有没有&#8221;r&#8221; permission,如果不是,系统检查用户是不是文件属组中一员,如果以上都不是,那么查看others是否被赋予了&#8221;r&#8221; permission</p>
+
+<h4>执行权限和脚本</h4>
+
+<p>如果用户有某个文件的&#8221;x&#8221; permission而没有&#8221;r&#8221; permission,他就可以执行这个文件, 但他不能copy文件</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">qktechies</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-01-26T10:05:44+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:05 am</span></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+   <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="/blog/2015/01/26/file-and-directory-permissions" data-title="file and directory permissions" data-url="http://qktechies.github.io/blog/2015/01/26/file-and-directory-permissions/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"qktechies"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!-- 多说公共JS代码 end -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/01/26/gitqi-bu/" title="Previous Post: git起步1">&laquo; git起步1</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/01/31/head-first-servlet1/" title="Next Post: head first servlet1">head first servlet1 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/02/02/gitqi-bu-3/">Git起步3</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/31/gitqi-bu-2/">Git起步2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/31/head-first-servlet1/">Head First Servlet1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/26/file-and-directory-permissions/">File and Directory Permissions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/26/gitqi-bu/">Git起步1</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - qktechies -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

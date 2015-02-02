@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://qktechies.github.io/blog/2015/02/02/gitqi-bu-3/</loc>
+    <lastmod>2015-02-02T10:43:09+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://qktechies.github.io/blog/2015/01/31/gitqi-bu-2/</loc>
+    <lastmod>2015-01-31T11:38:40+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://qktechies.github.io/blog/2015/01/31/head-first-servlet1/</loc>
+    <lastmod>2015-01-31T10:31:01+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://qktechies.github.io/blog/2015/01/26/file-and-directory-permissions/</loc>
+    <lastmod>2015-01-26T10:05:44+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://qktechies.github.io/blog/2015/01/26/gitqi-bu/</loc>
+    <lastmod>2015-01-26T10:03:15+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://qktechies.github.io/blog/2015/01/16/ios-view-and-window/</loc>
+    <lastmod>2015-01-16T16:09:02+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://qktechies.github.io/blog/2015/01/15/autolayoutzhi-nan/</loc>
+    <lastmod>2015-01-15T11:57:36+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://qktechies.github.io/blog/2015/01/12/iosshe-ji-mo-shi/</loc>
+    <lastmod>2015-01-12T10:16:26+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>http://qktechies.github.io/blog/2015/01/11/iosxue-xi/</loc>
     <lastmod>2015-01-11T15:00:38+08:00</lastmod>
     <priority>0.8</priority>
@@ -17,13 +57,13 @@
   </url>
   <url>
     <loc>http://qktechies.github.io/blog/archives/</loc>
-    <lastmod>2015-01-12T10:14:59+08:00</lastmod>
+    <lastmod>2015-02-02T10:54:06+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>http://qktechies.github.io/</loc>
-    <lastmod>2015-01-12T10:14:59+08:00</lastmod>
+    <lastmod>2015-02-02T10:54:06+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>

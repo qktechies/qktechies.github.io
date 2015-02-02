@@ -4,7 +4,7 @@
   <title><![CDATA[qkong的技术博客]]></title>
   <link href="http://qktechies.github.io/atom.xml" rel="self"/>
   <link href="http://qktechies.github.io/"/>
-  <updated>2015-01-12T10:14:59+08:00</updated>
+  <updated>2015-02-02T10:54:06+08:00</updated>
   <id>http://qktechies.github.io/</id>
   <author>
     <name><![CDATA[qktechies]]></name>
@@ -12,6 +12,1232 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git起步3]]></title>
+    <link href="http://qktechies.github.io/blog/2015/02/02/gitqi-bu-3/"/>
+    <updated>2015-02-02T10:43:09+08:00</updated>
+    <id>http://qktechies.github.io/blog/2015/02/02/gitqi-bu-3</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git起步2]]></title>
+    <link href="http://qktechies.github.io/blog/2015/01/31/gitqi-bu-2/"/>
+    <updated>2015-01-31T11:38:40+08:00</updated>
+    <id>http://qktechies.github.io/blog/2015/01/31/gitqi-bu-2</id>
+    <content type="html"><![CDATA[<h2>Git常用命令</h2>
+
+<h4>初始化一个git仓库</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$mkdir</span> gitDemo <span class="o">&amp;&amp;</span> <span class="nb">cd </span>gitDemo
+</span><span class='line'><span class="nv">$git</span> init
+</span><span class='line'>Initialized empty Git repository in /Users/qkong/Documents/demo_code/gitDemo/.git/<span class="o">(</span>初始化成功<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ll</span> -la .git
+</span><span class='line'>
+</span><span class='line'>total 24
+</span><span class='line'>-rw-r--r--   <span class="m">1</span> qkong  staff    23B  <span class="m">1</span> <span class="m">31</span> 14:48 HEAD
+</span><span class='line'>drwxr-xr-x   <span class="m">2</span> qkong  staff    68B  <span class="m">1</span> <span class="m">31</span> 14:48 branches
+</span><span class='line'>-rw-r--r--   <span class="m">1</span> qkong  staff   137B  <span class="m">1</span> <span class="m">31</span> 14:48 config
+</span><span class='line'>-rwxr-xr-x   <span class="m">1</span> qkong  staff    73B  <span class="m">1</span> <span class="m">31</span> 14:48 description
+</span><span class='line'>drwxr-xr-x  <span class="m">11</span> qkong  staff   374B  <span class="m">1</span> <span class="m">31</span> 14:48 hooks
+</span><span class='line'>drwxr-xr-x   <span class="m">3</span> qkong  staff   102B  <span class="m">1</span> <span class="m">31</span> 14:48 info
+</span><span class='line'>drwxr-xr-x   <span class="m">4</span> qkong  staff   136B  <span class="m">1</span> <span class="m">31</span> 14:48 objects
+</span><span class='line'>drwxr-xr-x   <span class="m">4</span> qkong  staff   136B  <span class="m">1</span> <span class="m">31</span> 14:48 refs
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>创建了一个.git目录包含所有仓库文件(git仓库骨架),初始化后仓库中没有文件被跟踪</p>
+
+<p>如果你想跟踪文件</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>touch demo
+</span><span class='line'>git add demo
+</span><span class='line'>git commit -m <span class="s2">&quot;first commit&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>克隆已存在的仓库</h4>
+
+<p>用git clone [url]来克隆一个仓库</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/libgit2/libgit2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>会创建一个libgit2的文件夹,在文件夹中初始化一个.git目录,然后拉取仓库中的所有数据</p>
+
+<p>也可以拷贝仓库到自定义的文件夹</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/libgit2/libgit2 mydirectory
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>git有很多种传输数据协议<a href="https://%E5%92%8Cgit://">https://%E5%92%8Cgit://</a></p>
+
+<p>github上都可以</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>https://github.com/libgit2/libgit2
+</span><span class='line'>
+</span><span class='line'>git@github.com:libgit2/libgit2.git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>记录仓库的变化</h4>
+
+<p>拷贝下一个git仓库文件,你想修改某些文件并把这些变化提交到仓库中,
+每个在git工作目录中的文件的状态</p>
+
+<ul>
+<li>tracked(被跟踪了)
+最后一次快照中的文件,状态可能是:Unmodified没修改过,Modified修改过,Staged暂存过</li>
+<li>untracked(没被跟踪)
+不在最后一次快照中且不在跟踪区</li>
+</ul>
+
+
+<h4>查看文件状态</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> status
+</span><span class='line'>On branch master
+</span><span class='line'>nothing to commit, working directory clean
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这意味着你有一个干净的工作目录-没有被跟踪的文件和被修改的文件</p>
+
+<p>编辑文件demo,创建文件demo2</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$echo</span> <span class="s2">&quot;demo&quot;</span>&gt;demo
+</span><span class='line'><span class="nv">$touch</span> demo2
+</span><span class='line'><span class="nv">$git</span> status
+</span><span class='line'>On branch master
+</span><span class='line'>Changes not staged <span class="k">for</span> commit:
+</span><span class='line'>  <span class="o">(</span>use <span class="s2">&quot;git add &lt;file&gt;...&quot;</span> to update what will be committed<span class="o">)</span>
+</span><span class='line'>  <span class="o">(</span>use <span class="s2">&quot;git checkout -- &lt;file&gt;...&quot;</span> to discard changes in working directory<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  modified:   demo
+</span><span class='line'>
+</span><span class='line'>Untracked files:
+</span><span class='line'>  <span class="o">(</span>use <span class="s2">&quot;git add &lt;file&gt;...&quot;</span> to include in what will be committed<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  demo2
+</span><span class='line'>
+</span><span class='line'>no changes added to commit <span class="o">(</span>use <span class="s2">&quot;git add&quot;</span> and/or <span class="s2">&quot;git commit -a&quot;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>git status显示demo修改过,demo2没有被跟踪,必须用git add加入</p>
+
+<h4>跟踪新文件</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> add demo
+</span><span class='line'><span class="nv">$git</span> add demo2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>查看仓库当前状态</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> status
+</span><span class='line'>On branch master
+</span><span class='line'>Changes to be committed:
+</span><span class='line'>  <span class="o">(</span>use <span class="s2">&quot;git reset HEAD &lt;file&gt;...&quot;</span> to unstage<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  modified:   demo
+</span><span class='line'>  new file:   demo2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>文件demo2不再是untracked,demo和demo2都被加入到暂存区</p>
+
+<p>如果再次编辑demo</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$echo</span> <span class="s1">&#39;change demo&#39;</span>&gt;demo
+</span><span class='line'><span class="nv">$git</span> status
+</span><span class='line'>On branch master
+</span><span class='line'>Changes to be committed:
+</span><span class='line'>  <span class="o">(</span>use <span class="s2">&quot;git reset HEAD &lt;file&gt;...&quot;</span> to unstage<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  modified:   demo
+</span><span class='line'>  new file:   demo2
+</span><span class='line'>
+</span><span class='line'>Changes not staged <span class="k">for</span> commit:
+</span><span class='line'>  <span class="o">(</span>use <span class="s2">&quot;git add &lt;file&gt;...&quot;</span> to update what will be committed<span class="o">)</span>
+</span><span class='line'>  <span class="o">(</span>use <span class="s2">&quot;git checkout -- &lt;file&gt;...&quot;</span> to discard changes in working directory<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  modified:   demo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>demo再次修改,文件变化没有被加入到跟踪区,这时demo文件即是跟踪文件也是非跟踪文件</p>
+
+<h4>简介查看文件状态</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> status -s<span class="o">(</span>--short<span class="o">)</span>
+</span><span class='line'>MM demo
+</span><span class='line'>A  demo2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A:已经加入到跟踪区
+M:已经修改过的文件</p>
+
+<h4>忽略文件</h4>
+
+<p>如果项目中有想不被git跟踪的文件或文件夹,例如测试文件,包含用户名和密码的文件等等,部署到生产环境中不需要这些文件,可以再目录下创建一个.gitignore的文件
+编辑.gitignore加入</p>
+
+<p>*.[oa]</p>
+
+<p>*~</p>
+
+<p>第一行告诉git忽略所有以.o或者.a结尾的文件,
+第二行告诉git忽略所有以~结尾的文件</p>
+
+<p>例子:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>abc<span class="o">]</span>匹配其中之一
+</span><span class='line'>? 匹配任意一个字符
+</span><span class='line'><span class="o">[</span>0-9<span class="o">]</span> 匹配数字
+</span><span class='line'>
+</span><span class='line'><span class="c">#没有.a文件</span>
+</span><span class='line'>*.a
+</span><span class='line'>
+</span><span class='line'><span class="c">#跟踪lib.a,忽略所有.a结尾文件</span>
+</span><span class='line'>!lib.a
+</span><span class='line'>
+</span><span class='line'><span class="c">#忽略TODO文件,但不湖绿TODO的子文件夹</span>
+</span><span class='line'>/TODO
+</span><span class='line'>
+</span><span class='line'><span class="c">#忽略build/目录下所有文件</span>
+</span><span class='line'>build/
+</span><span class='line'>
+</span><span class='line'><span class="c">#忽略doc/note.txt,但不忽略类似doc/server/arch.txt</span>
+</span><span class='line'>doc/*.txt
+</span><span class='line'>
+</span><span class='line'><span class="c">#忽略doc/server/arch.txt</span>
+</span><span class='line'>doc/**/*.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>查看暂存和没暂存区的变化</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#创建文件demo</span>
+</span><span class='line'><span class="nv">$git</span> init
+</span><span class='line'><span class="nv">$touch</span> demo
+</span><span class='line'><span class="nv">$git</span> add demo
+</span><span class='line'><span class="nv">$git</span> commit -m <span class="s1">&#39;create demo&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">#修改文件内容</span>
+</span><span class='line'><span class="nv">$echo</span> <span class="s1">&#39;line1&#39;</span>&gt;demo
+</span><span class='line'><span class="nv">$git</span> add demo
+</span><span class='line'><span class="nv">$git</span> diff
+</span><span class='line'>diff --git a/demo b/demo
+</span><span class='line'>index e69de29..a29bdeb 100644
+</span><span class='line'>--- a/demo
+</span><span class='line'>+++ b/demo
+</span><span class='line'>@@ -0,0 +1 @@
+</span><span class='line'>+line1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>git diff会分析出你还没有加入到暂存区的变化</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#加入到暂存区</span>
+</span><span class='line'><span class="nv">$git</span> add demo
+</span><span class='line'>
+</span><span class='line'><span class="c">#查看暂存区的变化</span>
+</span><span class='line'><span class="nv">$git</span> diff --staged
+</span><span class='line'>diff --git a/demo b/demo
+</span><span class='line'>index e69de29..a29bdeb 100644
+</span><span class='line'>--- a/demo
+</span><span class='line'>+++ b/demo
+</span><span class='line'>@@ -0,0 +1 @@
+</span><span class='line'>+line1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>git diff查看的是为加入暂存区的变化,如果在git add demo后执行git diff你将看到空输出</p>
+
+<p>例如此时你还没commit,但是你重新修改文件</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$echo</span> <span class="s1">&#39;line2&#39;</span>&gt;&gt;demo
+</span><span class='line'>
+</span><span class='line'><span class="c">#为加入暂存区的变化(+line2)</span>
+</span><span class='line'><span class="nv">$git</span> diff
+</span><span class='line'>diff --git a/demo b/demo
+</span><span class='line'>index a29bdeb..c0d0fb4 100644
+</span><span class='line'>--- a/demo
+</span><span class='line'>+++ b/demo
+</span><span class='line'>@@ -1 +1,2 @@
+</span><span class='line'> line1
+</span><span class='line'>+line2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>提交你的变化</h4>
+
+<p>现在你使用git add [file]把你想要的变化加入到暂存区,你就可以用git commit将这些变化提交到仓库了</p>
+
+<p>git commit -m [message]</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> add demo
+</span><span class='line'><span class="nv">$git</span> commit -m <span class="s1">&#39;add line1 and line2 to demo&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>移除文件</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> rm demo
+</span><span class='line'><span class="nv">$git</span> status
+</span><span class='line'>On branch master
+</span><span class='line'>Changes to be committed:
+</span><span class='line'>  <span class="o">(</span>use <span class="s2">&quot;git reset HEAD &lt;file&gt;...&quot;</span> to unstage<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  deleted:    demo
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$rm</span> demo
+</span><span class='line'><span class="nv">$git</span> status
+</span><span class='line'>On branch master
+</span><span class='line'>Changes not staged <span class="k">for</span> commit:
+</span><span class='line'>  <span class="o">(</span>use <span class="s2">&quot;git add/rm &lt;file&gt;...&quot;</span> to update what will be committed<span class="o">)</span>
+</span><span class='line'>  <span class="o">(</span>use <span class="s2">&quot;git checkout -- &lt;file&gt;...&quot;</span> to discard changes in working directory<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  deleted:    demo
+</span><span class='line'>
+</span><span class='line'>no changes added to commit <span class="o">(</span>use <span class="s2">&quot;git add&quot;</span> and/or <span class="s2">&quot;git commit -a&quot;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果使用rm,然后commit,就会提示:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>On branch master
+</span><span class='line'>Changes not staged <span class="k">for</span> commit:
+</span><span class='line'>  deleted:    demo
+</span><span class='line'>
+</span><span class='line'>no changes added to commit
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>因为删除文件demo也是对文件的修改,commit之前必须git add demo再git commit这个删除的改变</p>
+
+<p>而git rm自动执行了git add demo这个变化</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#删除暂存区demo变化数据</span>
+</span><span class='line'>git rm --cached demo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>移动文件</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> mv demo demo.bak
+</span><span class='line'>
+</span><span class='line'>相等于
+</span><span class='line'><span class="nv">$mv</span> demo demo.bak
+</span><span class='line'><span class="nv">$git</span> rm demo.bak
+</span><span class='line'><span class="nv">$git</span> add demo.bak
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>查看commit的历史</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> log
+</span><span class='line'>commit ca82a6dff817ec66f44342007202690a93763949
+</span><span class='line'>Author: Scott Chacon &lt;schacon@gmail.com&gt;
+</span><span class='line'>Date:   Mon Mar <span class="m">17</span> 21:52:11 <span class="m">2008</span> -0700
+</span><span class='line'>
+</span><span class='line'>    changed the verison number
+</span><span class='line'>
+</span><span class='line'>commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
+</span><span class='line'>Author: Scott Chacon &lt;schacon@gmail.com&gt;
+</span><span class='line'>Date:   Sat Mar <span class="m">15</span> 16:40:33 <span class="m">2008</span> -0700
+</span><span class='line'>
+</span><span class='line'>    removed unnecessary <span class="nb">test </span>code
+</span><span class='line'>
+</span><span class='line'>commit a11bef06a3f659402fe7563abf99ad00de2209e6
+</span><span class='line'>Author: Scott Chacon &lt;schacon@gmail.com&gt;
+</span><span class='line'>Date:   Sat Mar <span class="m">15</span> 10:31:28 <span class="m">2008</span> -0700
+</span><span class='line'>
+</span><span class='line'>    first commit
+</span><span class='line'>列出所有提交的变化 包括SHA-1校验和,作者的用户名,邮箱,日期和提交信息<span class="o">(</span>git commit -m <span class="s2">&quot;message&quot;</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  -p 具体改变的内容
+</span><span class='line'>  -n<span class="o">(</span>-1,-2<span class="o">)</span> 列出的条数
+</span><span class='line'>  --stat 压缩具体改变内容
+</span><span class='line'>  等等参数
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>修正提交</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> commit --amend
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Unstaging a staged file</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> reset
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Unmodified a modified file</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> checkout -- <span class="o">[</span>filename<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>显示远程仓库列表</h5>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> remote -v
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>添加远程仓库</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote add <span class="o">[</span>shortname<span class="o">]</span> <span class="o">[</span>url<span class="o">]</span>
+</span><span class='line'><span class="nv">$git</span> remote add pb https://github.com/paulboone/ticgit
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>远程仓库拉去数据</h5>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> fetch <span class="o">[</span>remote-name<span class="o">]</span>
+</span><span class='line'>从远程仓库中拉取本地没有的数据
+</span><span class='line'>git pul自动拉取数据并将远程的分支合并到现在的奉旨
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>推送到远程</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> push <span class="o">[</span>remote-name<span class="o">]</span> <span class="o">[</span>branch-name<span class="o">]</span>
+</span><span class='line'>只有你拥有写权利并且同事没有人clone时,如果有人和你同时push,你的push将会中断
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>查看某个远程仓库具体信息</h5>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> remote show <span class="o">[</span>remote-name<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>重命名或删除远程仓库名字</h5>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> remote renmae pb paul
+</span><span class='line'><span class="nv">$git</span> remote rm paul
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Tagging</h4>
+
+<p>查看所有tag</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> clone https://github.com/jessesquires/JSQMessagesViewController
+</span><span class='line'><span class="nv">$cd</span> JSQMessagesViewController
+</span><span class='line'><span class="c">#查看所有tag</span>
+</span><span class='line'><span class="nv">$git</span> tag
+</span><span class='line'>1.0.0
+</span><span class='line'>1.0.1
+</span><span class='line'>1.1.0
+</span><span class='line'>3.0.0
+</span><span class='line'>3.1.0
+</span><span class='line'>3.2.0
+</span><span class='line'>3.3.0
+</span><span class='line'>3.4.0
+</span><span class='line'>3.4.1
+</span><span class='line'>3.4.2
+</span><span class='line'>3.4.3
+</span><span class='line'>3.4.4
+</span><span class='line'>4.0.0
+</span><span class='line'>4.0.1
+</span><span class='line'>4.0.2
+</span><span class='line'>4.0.3
+</span><span class='line'>4.0.4
+</span><span class='line'>5.0.0
+</span><span class='line'>5.0.0-beta1
+</span><span class='line'>5.0.0-beta2
+</span><span class='line'>5.0.0-beta3
+</span><span class='line'>5.0.0-beta4
+</span><span class='line'>5.0.1
+</span><span class='line'>5.0.2
+</span><span class='line'>5.0.3
+</span><span class='line'>5.0.4
+</span><span class='line'>5.1.0
+</span><span class='line'>5.1.1
+</span><span class='line'>5.2.0
+</span><span class='line'>5.2.1
+</span><span class='line'>5.2.2
+</span><span class='line'>5.2.3
+</span><span class='line'>5.2.4
+</span><span class='line'>5.2.5
+</span><span class='line'>5.2.6
+</span><span class='line'>5.3.0
+</span><span class='line'>5.3.1
+</span><span class='line'>5.3.2
+</span><span class='line'>6.0-beta1
+</span><span class='line'>6.0-beta2
+</span><span class='line'>6.0-beta3
+</span><span class='line'>6.0-beta4
+</span><span class='line'>6.0-beta5
+</span><span class='line'>6.0-beta6
+</span><span class='line'>6.0.0
+</span><span class='line'>6.1.0
+</span><span class='line'>6.1.1
+</span><span class='line'>6.1.2
+</span><span class='line'>6.1.3
+</span><span class='line'>v2.0
+</span><span class='line'>v2.0.1
+</span><span class='line'>v2.0.2
+</span><span class='line'>
+</span><span class='line'><span class="c">#查看6开头的版本</span>
+</span><span class='line'><span class="nv">$git</span> tag -l <span class="s1">&#39;6*&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>创建tags</p>
+
+<p>git有两种tags:</p>
+
+<ul>
+<li>lightweight
+类似一个没有改变的branch,某个commit的pointer</li>
+<li>annotated
+存储在git数据库中的完整对象,包含校验和,tag名字,email,日期,tag message</li>
+</ul>
+
+
+<p>注释版tag(annotated tags)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$touch</span> version7.0.0
+</span><span class='line'><span class="nv">$git</span> add version7.0.0
+</span><span class='line'><span class="nv">$git</span> commit -m <span class="s1">&#39;myversion7.0.0&#39;</span>
+</span><span class='line'><span class="nv">$git</span> tag -a 7.0.0 -m <span class="s1">&#39;myversion7.0.0&#39;</span>
+</span><span class='line'><span class="nv">$git</span> tag -l <span class="s1">&#39;7*&#39;</span>
+</span><span class='line'>7.0.0
+</span><span class='line'><span class="nv">$git</span> show 7.0.0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>轻便版tag(lightweight tags)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$git</span> tag 7.0.0-lw
+</span><span class='line'><span class="nv">$git</span> tag -l <span class="s1">&#39;7*&#39;</span>
+</span><span class='line'>7.0.0
+</span><span class='line'>7.0.0-lw
+</span><span class='line'><span class="nv">$git</span> show 7.0.0-lw
+</span><span class='line'>commit 2a9cbbf1d69a32ac4cf9ce57b33ca6de6ffa1ac2
+</span><span class='line'>Author: qktechies &lt;996902001@qq.com&gt;
+</span><span class='line'>Date:   Mon Feb <span class="m">2</span> 10:08:52 <span class="m">2015</span> +0800
+</span><span class='line'>
+</span><span class='line'>    my version7.0.0
+</span><span class='line'>
+</span><span class='line'>diff --git a/version7.0.0 b/version7.0.0
+</span><span class='line'>new file mode 100644
+</span><span class='line'>index 0000000..e69de29
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>Sharing Tags</h5>
+
+<p>默认git push是不会把tags传送到远程服务器的</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#推送某个tag</span>
+</span><span class='line'><span class="nv">$git</span> push <span class="o">[</span>tagname<span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">#切换到某个tag</span>
+</span><span class='line'><span class="nv">$git</span> checkout -b version2 v2.0.0
+</span><span class='line'>自动创建和切换到version2分支
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>git别名(alias)</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git config --global alias.co checkout
+</span><span class='line'><span class="nv">$ </span>git config --global alias.br branch
+</span><span class='line'><span class="nv">$ </span>git config --global alias.ci commit
+</span><span class='line'><span class="nv">$ </span>git config --global alias.st status
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Head First Servlet1]]></title>
+    <link href="http://qktechies.github.io/blog/2015/01/31/head-first-servlet1/"/>
+    <updated>2015-01-31T10:31:01+08:00</updated>
+    <id>http://qktechies.github.io/blog/2015/01/31/head-first-servlet1</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[File and Directory Permissions]]></title>
+    <link href="http://qktechies.github.io/blog/2015/01/26/file-and-directory-permissions/"/>
+    <updated>2015-01-26T10:05:44+08:00</updated>
+    <id>http://qktechies.github.io/blog/2015/01/26/file-and-directory-permissions</id>
+    <content type="html"><![CDATA[<h4>users of file</h4>
+
+<ul>
+<li>the owner(the process&#8217; UID matcheds the user of the file)</li>
+<li>the group(the process&#8217; GID is a member of the file&rsquo;s group)</li>
+<li>the other(everyone else)</li>
+</ul>
+
+
+<h4>用户三种权限:</h4>
+
+<ul>
+<li>read</li>
+<li>write</li>
+<li>execute</li>
+</ul>
+
+
+<p>permissions assigned to a directory are not inherited by the files within that directory
+文件不继承上层目录的权限</p>
+
+<h4>目录权限:</h4>
+
+<ul>
+<li>read: list the files in a directory(ls)</li>
+<li>write: add a file to the directory, delete a file from a directory, rename a file</li>
+<li>execute: cd into it(make some directory your current working directory), access the &ldquo;inode&rdquo; information of the files within</li>
+</ul>
+
+
+<p>目录有两个属性:名字和inode号
+read可以获取文件名
+execute可以获取文件inode号</p>
+
+<p>&ldquo;cat /home/user/foo&#8221;需要文件foo的读权限
+只有你拥有/,/home,/home/user的搜索权限时,cat才能获取到foo文件的inode并且读取其中的内容,只有搜索到文件的inode才能读取其中的内容</p>
+
+<h4>细节</h4>
+
+<p>每个文件和目录有12个可设置的权限,意味着有2<sup>12</sup>=4096中可能的权限设置,12bits要么on要么off,每个权限可以独立被修改.</p>
+
+<p>文件权限和属性信息保存在文件inode中,只有文件的属主可以修改文件的inode例如permission和group.
+文件owner修改permission不需要任何权限
+只有root用户才能修改文件的owner</p>
+
+<p>permission没有赋予用户权利运行某些程序,而是赋予权利运行某些system call(UNIX API)
+例如:cat和more都使用了read() system call</p>
+
+<p>除了9位权限位(rwx for owner, group and others),还有三位:</p>
+
+<ul>
+<li>set User ID(SUID or setuid)</li>
+<li>set Group ID(SGID or setgid)</li>
+<li>sticky(or text) bit</li>
+</ul>
+
+
+<h4>Files</h4>
+
+<p>用户尝试使用unix命令例如cat读文件内容时,system call read()将会被调用并且&#8221;r&#8221; permission is required. 系统检查用户是不是属主并且属主有没有&#8221;r&#8221; permission,如果不是,系统检查用户是不是文件属组中一员,如果以上都不是,那么查看others是否被赋予了&#8221;r&#8221; permission</p>
+
+<h4>执行权限和脚本</h4>
+
+<p>如果用户有某个文件的&#8221;x&#8221; permission而没有&#8221;r&#8221; permission,他就可以执行这个文件, 但他不能copy文件</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git起步1]]></title>
+    <link href="http://qktechies.github.io/blog/2015/01/26/gitqi-bu/"/>
+    <updated>2015-01-26T10:03:15+08:00</updated>
+    <id>http://qktechies.github.io/blog/2015/01/26/gitqi-bu</id>
+    <content type="html"><![CDATA[<h2>关于版本控制</h2>
+
+<h4>Version control</h4>
+
+<ul>
+<li>记录文件随时间的变化</li>
+<li>重新回退到指定版本</li>
+</ul>
+
+
+<h4>本地版本控制系统</h4>
+
+<p>很多版本控制的方法就是把文件拷贝到另一个文件夹重命名,比如重命名为当前事件,这样就可以随意修改当前的文件夹,但是你很容易忘记版本中修改了哪些</p>
+
+<p><img src="http://qktechies.github.io/source/images/gitqi-bu1/localvcs.png" alt="" /></p>
+
+<p><img src="http://qktechies.github.io/source/images/search.png" alt="" /></p>
+
+<h4>集中式版本控制系统</h4>
+
+<p>本地版本控制系统最主要的问题是难以在开发者之间合作,为了解决这个问题,集中式版本控制系统出现了(CVS Centralized Version Control System),例如Subversion</p>
+
+<p>客户端成员可以从中心服务器check out文件
+<img src="http://qktechies.github.io/source/images/gitqi-bu1/cvs.png" alt="" /></p>
+
+<p>缺点:
+如果CVS服务器宕机1小时,那么一小时之内就无法合作或保存版本修改,如果CVS服务器数据库坏了,你将失去工程的所有版本信息</p>
+
+<h4>分布式版本控制系统</h4>
+
+<p>DVCS(Distributed Version Control Systems)
+客户端不仅仅check out文件的最新快照而是仓库的完整镜像,如果服务器宕机了,其他系统就可以依赖他合作</p>
+
+<h2>Git基础</h2>
+
+<h4>快照而不是变化</h4>
+
+<p>git和其他VCS(Subversion..)最大的不同就是数据的思考方式</p>
+
+<p>其他VCS记录文件随事件的变化
+<img src="http://qktechies.github.io/source/images/gitqi-bu1/3.png" alt="" /></p>
+
+<p>git记录数据当前的快照,储存数据为快照溜,如果文件没有变化,git就不会重新存储文件
+<img src="http://qktechies.github.io/source/images/gitqi-bu1/4.png" alt="" /></p>
+
+<h4>大部分的操作都是本地的</h4>
+
+<p>git上大部分操作只需要本地文件和资源,因为你有所有的项目历史版本在本地,例如我们需要查看历史版本时不需要联网</p>
+
+<h4>时刻保持数据完整性</h4>
+
+<p>保存到git之前,数据都会检查和校验和,并且文件将此结果作为数据的唯一标识符,这意味着在修改了任何文件或者文件夹内容的情况下,git不可能不知道,如果文件在传输过程中丢失数据或者损坏,git都能检查到.</p>
+
+<p>git校验和的机制是SHA-1 hash
+40个十六进制的字符串(0-9 and a-f) 计算文件内容和目录结构的SHA-1 hash
+大概是这样:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dae780eee1cb1f231a937e7e475c90f5d62ac594</span></code></pre></td></tr></table></div></figure>
+
+
+<p>linux中使用openssl sha1 FILENAME(文件名)生成文件内容的SHA-1 HASH值
+只要两个文件内容相同,内容加密结果也相同</p>
+
+<p>git储存文件内容hash值在数据库中而不是文件名</p>
+
+<h4>文件三种状态</h4>
+
+<ul>
+<li>Committed 数据已经储存到本地数据库中</li>
+<li>Modified 文件被修改过但没有提交到本地数据库中</li>
+<li><p>Staged 已暂存表示把已修改的文件放在下次提交时要保存的清单中
+<img src="http://qktechies.github.io/source/images/gitqi-bu1/5.png" alt="" /></p></li>
+<li><p>.git文件夹存储了项目的元数据和对象数据库,git最重要的部分,每次从其他远程仓库上拷贝的数据就在.git中</p></li>
+<li>working directory工作目录,项目文件的某个版本</li>
+<li>staging area:在Git目录下,储存这下一次commit的相关信息</li>
+</ul>
+
+
+<p>git大概工作流程</p>
+
+<ol>
+<li>在工作目录下编辑文件</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$mkdir gitDemo 
+</span><span class='line'>$cd gitDemo
+</span><span class='line'>$git init
+</span><span class='line'>Initialized empty Git repository in /Users/qkong/Desktop/gitDemo/.git/
+</span><span class='line'>echo "demo"&gt;demo</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>对修改后的文件进行快照，然后保存到暂存区域</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git add demo</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>提交更新，将保存在暂存区域的文件快照永久转储到 Git 目录中。</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git commit -m 'add demo file'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Git第一次设置</p>
+
+<ol>
+<li>/etc/gitconfig git config &ndash;system</li>
+<li>~/.gitconfig git config &ndash;global</li>
+<li>.git/config git config</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ios View and Window]]></title>
+    <link href="http://qktechies.github.io/blog/2015/01/16/ios-view-and-window/"/>
+    <updated>2015-01-16T16:09:02+08:00</updated>
+    <id>http://qktechies.github.io/blog/2015/01/16/ios-view-and-window</id>
+    <content type="html"><![CDATA[<ul>
+<li>视图层级关系</li>
+</ul>
+
+
+<p><img src="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/Art/view-layer-store.jpg" alt="" /></p>
+
+<p>UIWindow:底部画板,持续存在与app整个生命周期内
+app启动实例化UIApplicationMain
+ UIWindow* w = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];</p>
+
+<p>设置window的rootViewController</p>
+
+<ul>
+<li><p>Super view和subview概念</p></li>
+<li><p>视图绘画方式</p></li>
+</ul>
+
+
+<p>UIView用于展现内容,</p>
+
+<ol>
+<li>view第一次出现在屏幕上是,系统绘制它的内容并保留该内容的快照,视图再次加载并且没有变化,快照图片会被再次使用</li>
+<li>只有当视图内容发生变化,系统才会重新绘制该图片</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Autolayout指南]]></title>
+    <link href="http://qktechies.github.io/blog/2015/01/15/autolayoutzhi-nan/"/>
+    <updated>2015-01-15T11:57:36+08:00</updated>
+    <id>http://qktechies.github.io/blog/2015/01/15/autolayoutzhi-nan</id>
+    <content type="html"><![CDATA[<h1>简介</h1>
+
+<p>Autolayout通过各个控件之间创建数学描述关系来布局app的界面,在单个或者多个控件之间定义constraints联系,使用Auto layout,你可以创建动态自适应的用户界面来响应屏幕大小,设备横竖屏和本地化的变化</p>
+
+<ul>
+<li>通过可视化Menu菜单添加constraints</li>
+<li>通过代码添加constraints</li>
+</ul>
+
+
+<h2>constraints基础</h2>
+
+<h3>什么是constraints</h3>
+
+<p>你可能想完成&#8221;视图button离父视图坐标相距20个像素&#8221;,那么表达式可以写成button.left = container.left+20类似表达式y=m*x+b</p>
+
+<ul>
+<li>y和x是视图的attribute</li>
+<li>m和b是floating point值</li>
+</ul>
+
+
+<p>以后constraints会遇到的attribute列表:</p>
+
+<ul>
+<li>left</li>
+<li>right</li>
+<li>top</li>
+<li>bottom</li>
+<li>leading</li>
+<li>trailing</li>
+<li>width</li>
+<li>height</li>
+<li>centerX</li>
+<li>centerY</li>
+<li>baseline</li>
+</ul>
+
+
+<p>Constraints包含了其他的属性</p>
+
+<ul>
+<li>Constant Value: 偏移量</li>
+<li>Relation 与某个控件的位置关系</li>
+<li>Priority 优先级</li>
+</ul>
+
+
+<h1>Interface Builder中操作Constraints</h1>
+
+<h2>Ctrl+Drag添加Constraints</h2>
+
+<p>添加Constraints最快的方式就是选中一个控件按住Ctrl键向某个方向(上下左右)拖动, 和我们创建控件链接到IBOutlets和IBAction的方式差不多</p>
+
+<p>Ctrl+拖动某个控件就可以创建一个Constraints</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ios设计模式]]></title>
+    <link href="http://qktechies.github.io/blog/2015/01/12/iosshe-ji-mo-shi/"/>
+    <updated>2015-01-12T10:16:26+08:00</updated>
+    <id>http://qktechies.github.io/blog/2015/01/12/iosshe-ji-mo-shi</id>
+    <content type="html"><![CDATA[<h3>Using Design Patterns 设计模式</h3>
+
+<ul>
+<li>MVC
+Model-View-Controller</li>
+</ul>
+
+
+<p>Model:记录app的数据</p>
+
+<p>View:现实用户界面,填充app内容</p>
+
+<p>Controller:控制视图,模型和视图交流的渠道</p>
+
+<p><img src="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOS/Art/ModelViewController_2x.png" alt="" /></p>
+
+<p>ToDoList app中:</p>
+
+<p>storyboard:视图</p>
+
+<p>AddToDoItemViewController:控制器</p>
+
+<ul>
+<li>Target-Action(目标动作模式)</li>
+</ul>
+
+
+<p><img src="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOS/Art/target_action_2x.png" alt="" /></p>
+
+<p>按下某个按钮时,调用click方法,此时target就是按钮对象,action是controller中的click方法</p>
+
+<ul>
+<li>Delegation 代理模式</li>
+</ul>
+
+
+<h3>Foundation</h3>
+
+<ul>
+<li>Value Objects</li>
+</ul>
+
+
+<p>NSString和NSMutableString</p>
+
+<p>NSData和NSMutableData</p>
+
+<p>NSDate</p>
+
+<p>NSNumber</p>
+
+<p>NSValue</p>
+
+<ul>
+<li><p>Strings - NSString</p></li>
+<li><p>Numbers - NSNumber</p></li>
+<li><p>Collection Objects</p></li>
+</ul>
+
+
+<p>NSArray和NSMutableArray</p>
+
+<p>NSSet和NSMutableSet</p>
+
+<p>NSDictionary和NSMutableDictionary</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ios学习]]></title>

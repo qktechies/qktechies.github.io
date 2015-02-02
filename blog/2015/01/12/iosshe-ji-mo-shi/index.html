@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ios设计模式 - qkong的技术博客</title>
+  <meta name="author" content="qktechies">
+
+  
+  <meta name="description" content="Using Design Patterns 设计模式 MVC
+Model-View-Controller Model:记录app的数据 View:现实用户界面,填充app内容 Controller:控制视图,模型和视图交流的渠道 ToDoList app中: storyboard:视图 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://qktechies.github.io/blog/2015/01/12/iosshe-ji-mo-shi">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="qkong的技术博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">qkong的技术博客</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:qktechies.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Ios设计模式</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-12T10:16:26+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:16 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>Using Design Patterns 设计模式</h3>
+
+<ul>
+<li>MVC
+Model-View-Controller</li>
+</ul>
+
+
+<p>Model:记录app的数据</p>
+
+<p>View:现实用户界面,填充app内容</p>
+
+<p>Controller:控制视图,模型和视图交流的渠道</p>
+
+<p><img src="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOS/Art/ModelViewController_2x.png" alt="" /></p>
+
+<p>ToDoList app中:</p>
+
+<p>storyboard:视图</p>
+
+<p>AddToDoItemViewController:控制器</p>
+
+<ul>
+<li>Target-Action(目标动作模式)</li>
+</ul>
+
+
+<p><img src="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOS/Art/target_action_2x.png" alt="" /></p>
+
+<p>按下某个按钮时,调用click方法,此时target就是按钮对象,action是controller中的click方法</p>
+
+<ul>
+<li>Delegation 代理模式</li>
+</ul>
+
+
+<h3>Foundation</h3>
+
+<ul>
+<li>Value Objects</li>
+</ul>
+
+
+<p>NSString和NSMutableString</p>
+
+<p>NSData和NSMutableData</p>
+
+<p>NSDate</p>
+
+<p>NSNumber</p>
+
+<p>NSValue</p>
+
+<ul>
+<li><p>Strings - NSString</p></li>
+<li><p>Numbers - NSNumber</p></li>
+<li><p>Collection Objects</p></li>
+</ul>
+
+
+<p>NSArray和NSMutableArray</p>
+
+<p>NSSet和NSMutableSet</p>
+
+<p>NSDictionary和NSMutableDictionary</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">qktechies</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-01-12T10:16:26+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:16 am</span></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+   <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="/blog/2015/01/12/iosshe-ji-mo-shi" data-title="ios设计模式" data-url="http://qktechies.github.io/blog/2015/01/12/iosshe-ji-mo-shi/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"qktechies"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!-- 多说公共JS代码 end -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/01/11/iosxue-xi/" title="Previous Post: ios学习">&laquo; ios学习</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/01/15/autolayoutzhi-nan/" title="Next Post: Autolayout指南">Autolayout指南 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/02/02/gitqi-bu-3/">Git起步3</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/31/gitqi-bu-2/">Git起步2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/31/head-first-servlet1/">Head First Servlet1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/26/file-and-directory-permissions/">File and Directory Permissions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/26/gitqi-bu/">Git起步1</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - qktechies -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
