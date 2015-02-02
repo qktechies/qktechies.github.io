@@ -15,16 +15,13 @@ categories:
 ####本地版本控制系统
 很多版本控制的方法就是把文件拷贝到另一个文件夹重命名,比如重命名为当前事件,这样就可以随意修改当前的文件夹,但是你很容易忘记版本中修改了哪些
 
-![](/source/images/gitqi-bu1/localvcs.png)
-
-![](/source/images/search.png)
-
+![](/images/gitqi-bu1/localvcs.png)
 
 ####集中式版本控制系统
 本地版本控制系统最主要的问题是难以在开发者之间合作,为了解决这个问题,集中式版本控制系统出现了(CVS Centralized Version Control System),例如Subversion
 
 客户端成员可以从中心服务器check out文件
-![](/source/images/gitqi-bu1/cvs.png)
+![](/images/gitqi-bu1/cvs.png)
 
 缺点:
 如果CVS服务器宕机1小时,那么一小时之内就无法合作或保存版本修改,如果CVS服务器数据库坏了,你将失去工程的所有版本信息
@@ -39,10 +36,12 @@ DVCS(Distributed Version Control Systems)
 git和其他VCS(Subversion..)最大的不同就是数据的思考方式
 
 其他VCS记录文件随事件的变化
-![](/source/images/gitqi-bu1/3.png)
+
+![](/images/gitqi-bu1/3.png)
 
 git记录数据当前的快照,储存数据为快照溜,如果文件没有变化,git就不会重新存储文件
-![](/source/images/gitqi-bu1/4.png)
+
+![](/images/gitqi-bu1/4.png)
 
 ####大部分的操作都是本地的
 git上大部分操作只需要本地文件和资源,因为你有所有的项目历史版本在本地,例如我们需要查看历史版本时不需要联网
@@ -66,8 +65,8 @@ git储存文件内容hash值在数据库中而不是文件名
 - Committed 数据已经储存到本地数据库中
 - Modified 文件被修改过但没有提交到本地数据库中
 - Staged 已暂存表示把已修改的文件放在下次提交时要保存的清单中
-![](/source/images/gitqi-bu1/5.png)
 
+![](/images/gitqi-bu1/5.png)
 
 - .git文件夹存储了项目的元数据和对象数据库,git最重要的部分,每次从其他远程仓库上拷贝的数据就在.git中
 - working directory工作目录,项目文件的某个版本
