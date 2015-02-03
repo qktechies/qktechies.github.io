@@ -1,7 +1,283 @@
 ---
 layout: post
-title: "git起步3"
+title: "git起步3 - git分支"
 date: 2015-02-02 10:43:09 +0800
 comments: true
 categories: 
 ---
+
+##什么是Branch
+git存储数据的一系列快照而不是数据变化量
+
+每次commit,git就会创建一个commit对象来包含快照内容的指针
+
+commit对象中:
+
+- 作者姓名
+- 作者邮箱
+- 你提交时添加的信息(git commit -m [message])
+- commit的指针
+- 当前commit的父commit,如果是第一次commit则没有父commit
+
+例子:
+假设一个文件夹中有三个文件
+
+```bash
+￼$ git add README test.rb LICENSE
+$ git commit -m 'initial commit of my project'
+```
+
+- 你把他们加入到暂存区
+  此时暂存着每个文件的校验和(checksums SHA-1 hash),而不是文件名(5b1d3,911e7,cba0a)
+- commit到本地仓库
+  git算出每个子文件夹的校验和,在git仓库中储存这三个对象
+
+![](/images/gitqi-bu3/1.png)
+
+如果修改文件并再次commit,下一次commit中将会保存上次父commit的指针
+
+![](/images/gitqi-bu3/2.png)
+
+Branch(分支) 是commit中可移动的指针,默认分支名字是master,每当你开始commit,就会有一个master分支指向你最后一次的commit,每次你commit,它就会自动的移动向前
+
+![](/images/gitqi-bu3/3.png)
+
+##创建一个分支
+
+```bash
+$ git branch testing
+```
+
+![](/images/gitqi-bu3/4.png)
+
+git如何知道你所在的当前分支呢?git中有一个特殊的指针叫HEAD指向当前本地分支,如果你刚好在master分支上,git branch testing只创建了分支而没有切换到testing分支,此时HEAD仍指向master
+
+![](/images/gitqi-bu3/5.png)
+
+查看分支指针指向
+
+```bash
+$ git log --oneline --decorate569d40f (HEAD, testing, master) initial commit of my project
+```
+
+切换分支,HEAD指向testing,当前分支切换到testing
+
+```bash
+$ git checkout testing
+```
+
+![](/images/gitqi-bu3/6.png)
+
+切换到testing后commit
+
+```bash
+$ echo 'branch testing change'>test.rb
+$ git add test.rb
+$ git commit -m 'made a change on branch testing'
+```
+
+此时分支testing向前移动,而master分支仍然指向原先的commit
+
+![](/images/gitqi-bu3/7.png)
+
+重新切换当前分支到master(HEAD->master)
+
+```bash
+$ git checkout master
+```
+
+- 移动HEAD指针指向master分支
+- 回复工作目录中的文件到master指向的快照
+
+![](/images/gitqi-bu3/8.png)
+
+如果此时你修改文件并再次commit
+
+```bash
+$ echo 'branch  master change'>>test.rb
+$ git commit -a -m 'branch master changes'
+```
+
+![](/images/gitqi-bu3/9.png)
+
+你可以通过命令获取历史commit以及分支信息
+
+```bash
+$ git log --oneline --decorate --graph --all
+* 079dca6 (HEAD, master) branch master changes
+| * 609fd06 (testing) made a change on branch testing
+|/
+* 569d40f initial commit of my project
+```
+
+git中分支只是一个简单的文件,该文件包含了它指向的包含40个字符校验和的commit,所有分支branch很容易创建和删除,创建一个分支就和在一个文件中写40bytes数据一样简单和快速
+
+##分支基础
+网站有两个互不相干的bug需要修改 
+例如
+
+git目录下有个index.html文件
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	我的邮箱是
+	<div>
+</body>
+</html>
+```
+
+- issue53:标签div没闭合
+- 网站邮箱没有填写
+
+工作目录初始状态
+
+![](/images/gitqi-bu3/10.png)
+
+新建一个issue53分支并切换到该分支
+
+```bash
+$ git checkout -b iss53
+```
+
+等同于
+
+```bash
+$ git branch iss53
+$ git checkout iss53
+```
+
+![](/images/gitqi-bu3/11.png)
+
+```bash
+$ vim index.html
+(添加</div>)$ git commit -a -m 'added a new div [issue 53]'
+```
+
+![](/images/gitqi-bu3/12.png)
+
+重新切回master修改邮箱错误
+
+```bash
+$ git checkout master
+Switched to branch 'master'
+```
+
+新建分支修改邮箱
+
+```bash
+￼$ git checkout -b hotfixSwitched to a new branch 'hotfix'$ vim index.html$ git commit -a -m 'fixed the broken email address'
+[hotfix 36cc781] fixed the broken email address
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+```
+
+![](/images/gitqi-bu3/13.png)
+
+确定两次修改都是我们想要的,我们就可以开始合并分支了
+
+合并hotfix分支
+
+```bash
+$ git checkout master$ git merge hotfix Updating f42c576..3a0874c Fast-forward index.html | 2 ++ 1 file changed, 2 insertions(+)
+```
+
+![](/images/gitqi-bu3/14.png)
+
+删除hotfix分支
+
+```bash
+$ git branch -d hotfix
+Deleted branch hotfix (was 36cc781).
+```
+
+![](/images/gitqi-bu3/15.png)
+
+iss53也是同样的步骤,
+master没有向前移动,而是重新创建一个快照
+
+![](/images/gitqi-bu3/16.png)
+
+
+##合并基础
+如果两个分支同时编辑某一行时,就会发生冲突
+例如
+git目录下有一个demo文件,内容为空
+
+```bash
+$ touch demo
+$ git add demo
+$ git commit -m 'create demo'
+```
+
+切换分支branch1,第一行写入内容
+
+```bash
+$ git checkout -b branch1
+$ echo 'branch1 edit'>demo
+$ git commit -a -m 'branch1 edit'
+$ git checkout master
+```
+
+切换到分支branch2,第一行写入内容
+
+```bash
+$ git checkout -b branch2
+$ echo 'branch2 edit'>demo
+$ git commit -a -m 'branch2 edit'
+$ git checkout master
+```
+
+合并branch1
+
+```bash
+$ git merge branch1
+Updating f2c9eff..9490dac
+Fast-forward
+ demo | 1 +
+ 1 file changed, 1 insertion(+)
+```
+
+合并branch2
+
+```bash
+$ git merge branch2
+Auto-merging demo
+CONFLICT (content): Merge conflict in demo
+Automatic merge failed; fix conflicts and then commit the result.
+```
+发现存在冲突, 文件demo
+
+```
+<<<<<<< HEAD
+branch1 edit
+=======
+branch2 edit
+>>>>>>> branch2
+```
+
+
+####方法1:mergetool
+
+```
+$ git mergetool
+```
+
+![](/images/gitqi-bu3/17.png)
+
+####方法2:手动编辑文件
+
+修改文件成你想要的结果
+最后完成merge
+
+```bash
+$ git add demo
+$ git commit -m 'merge branch2'
+```
+
+
+
