@@ -4,7 +4,7 @@
   <title><![CDATA[qkong的技术博客]]></title>
   <link href="http://qktechies.github.io/atom.xml" rel="self"/>
   <link href="http://qktechies.github.io/"/>
-  <updated>2015-02-02T11:06:29+08:00</updated>
+  <updated>2015-02-03T16:23:32+08:00</updated>
   <id>http://qktechies.github.io/</id>
   <author>
     <name><![CDATA[qktechies]]></name>
@@ -14,11 +14,435 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Git起步3]]></title>
+    <title type="html"><![CDATA[Git起步4-远程分支]]></title>
+    <link href="http://qktechies.github.io/blog/2015/02/02/gitqi-bu-yuan-cheng-fen-zhi/"/>
+    <updated>2015-02-02T16:32:19+08:00</updated>
+    <id>http://qktechies.github.io/blog/2015/02/02/gitqi-bu-yuan-cheng-fen-zhi</id>
+    <content type="html"><![CDATA[<p>远程分支是远程仓库中分支状态的指针,他们是本地不能移动的分支</p>
+
+<p>格式(remote)/(branch)</p>
+
+<h2>查看所有的远程</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git remote -v
+</span><span class='line'>origin    https://github.com/schacon/simplegit-progit (fetch)
+</span><span class='line'>origin    https://github.com/schacon/simplegit-progit (push)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>默认origin,例如有人开了一个iss53分支纠正bug,那么你申请修改bug时,可以把修改完的代码提交到origin/iss53</p>
+
+<p>origin不是特殊的:
+就像分支master是git目录起始的默认分支名,origin也是git从远程传clone下来后的远程仓库</p>
+
+<p>团队开发有个git.ourcompany.com的git服务器,git clone:</p>
+
+<ul>
+<li>命名远程仓库为origin,下载所有的数据</li>
+<li>建立一个指向它的master分支指针,在本地命名为origin/master,你无法修改其数据</li>
+<li>建立属于自己的本地master分支,在这个分支上工作</li>
+</ul>
+
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu4/1.png" alt="" /></p>
+
+<p>如果有人将他的更新代码提交到服务器git.ourcompany.com上并更新了它的master分支,而我们也在本地修改了代码,此时我们本地的origin/master指针不会移动</p>
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu4/2.png" alt="" /></p>
+
+<p>为了同步工作,必须先运行git fetch origin从服务器上拉取没有的数据</p>
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu4/3.png" alt="" /></p>
+
+<p>当多个团队开发时,服务器处于git.team1.ourcompany.com,你可以使用git remote add [url]添加远程仓库</p>
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu4/4.png" alt="" /></p>
+
+<p>git fetch teamone可以拉取teamone服务器中本地没有的消息,origin/master中包含了teamone/master的所有checksum,所以没有拉取数据而是设置了一个远程分支名为teamone/master</p>
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu4/5.png" alt="" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git起步3 - Git分支]]></title>
     <link href="http://qktechies.github.io/blog/2015/02/02/gitqi-bu-3/"/>
     <updated>2015-02-02T10:43:09+08:00</updated>
     <id>http://qktechies.github.io/blog/2015/02/02/gitqi-bu-3</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<h2>什么是Branch</h2>
+
+<p>git存储数据的一系列快照而不是数据变化量</p>
+
+<p>每次commit,git就会创建一个commit对象来包含快照内容的指针</p>
+
+<p>commit对象中:</p>
+
+<ul>
+<li>作者姓名</li>
+<li>作者邮箱</li>
+<li>你提交时添加的信息(git commit -m [message])</li>
+<li>commit的指针</li>
+<li>当前commit的父commit,如果是第一次commit则没有父commit</li>
+</ul>
+
+
+<p>例子:
+假设一个文件夹中有三个文件</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>￼<span class="nv">$ </span>git add README test.rb LICENSE
+</span><span class='line'><span class="nv">$ </span>git commit -m <span class="s1">&#39;initial commit of my project&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>你把他们加入到暂存区
+此时暂存着每个文件的校验和(checksums SHA-1 hash),而不是文件名(5b1d3,911e7,cba0a)</li>
+<li>commit到本地仓库
+git算出每个子文件夹的校验和,在git仓库中储存这三个对象</li>
+</ul>
+
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/1.png" alt="" /></p>
+
+<p>如果修改文件并再次commit,下一次commit中将会保存上次父commit的指针</p>
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/2.png" alt="" /></p>
+
+<p>Branch(分支) 是commit中可移动的指针,默认分支名字是master,每当你开始commit,就会有一个master分支指向你最后一次的commit,每次你commit,它就会自动的移动向前</p>
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/3.png" alt="" /></p>
+
+<h2>创建一个分支</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git branch testing
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/4.png" alt="" /></p>
+
+<p>git如何知道你所在的当前分支呢?git中有一个特殊的指针叫HEAD指向当前本地分支,如果你刚好在master分支上,git branch testing只创建了分支而没有切换到testing分支,此时HEAD仍指向master</p>
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/5.png" alt="" /></p>
+
+<p>查看分支指针指向</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git log --oneline --decorate
+</span><span class='line'>569d40f <span class="o">(</span>HEAD, testing, master<span class="o">)</span> initial commit of my project
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>切换分支,HEAD指向testing,当前分支切换到testing</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout testing
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/6.png" alt="" /></p>
+
+<p>切换到testing后commit</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;branch testing change&#39;</span>&gt;test.rb
+</span><span class='line'><span class="nv">$ </span>git add test.rb
+</span><span class='line'><span class="nv">$ </span>git commit -m <span class="s1">&#39;made a change on branch testing&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>此时分支testing向前移动,而master分支仍然指向原先的commit</p>
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/7.png" alt="" /></p>
+
+<p>重新切换当前分支到master(HEAD->master)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout master
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>移动HEAD指针指向master分支</li>
+<li>回复工作目录中的文件到master指向的快照</li>
+</ul>
+
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/8.png" alt="" /></p>
+
+<p>如果此时你修改文件并再次commit</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;branch  master change&#39;</span>&gt;&gt;test.rb
+</span><span class='line'><span class="nv">$ </span>git commit -a -m <span class="s1">&#39;branch master changes&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/9.png" alt="" /></p>
+
+<p>你可以通过命令获取历史commit以及分支信息</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git log --oneline --decorate --graph --all
+</span><span class='line'>* 079dca6 <span class="o">(</span>HEAD, master<span class="o">)</span> branch master changes
+</span><span class='line'><span class="p">|</span> * 609fd06 <span class="o">(</span>testing<span class="o">)</span> made a change on branch testing
+</span><span class='line'><span class="p">|</span>/
+</span><span class='line'>* 569d40f initial commit of my project
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>git中分支只是一个简单的文件,该文件包含了它指向的包含40个字符校验和的commit,所有分支branch很容易创建和删除,创建一个分支就和在一个文件中写40bytes数据一样简单和快速</p>
+
+<h2>分支基础</h2>
+
+<p>网站有两个互不相干的bug需要修改
+例如</p>
+
+<p>git目录下有个index.html文件</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;UTF-8&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'><span class="nt">&lt;/head&gt;</span>
+</span><span class='line'><span class="nt">&lt;body&gt;</span>
+</span><span class='line'>  我的邮箱是
+</span><span class='line'>  <span class="nt">&lt;div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>issue53:标签div没闭合</li>
+<li>网站邮箱没有填写</li>
+</ul>
+
+
+<p>工作目录初始状态</p>
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/10.png" alt="" /></p>
+
+<p>新建一个issue53分支并切换到该分支</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout -b iss53
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>等同于</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git branch iss53
+</span><span class='line'><span class="nv">$ </span>git checkout iss53
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/11.png" alt="" /></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>vim index.html
+</span><span class='line'><span class="o">(</span>添加&lt;/div&gt;<span class="o">)</span>
+</span><span class='line'><span class="nv">$ </span>git commit -a -m <span class="s1">&#39;added a new div [issue 53]&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/12.png" alt="" /></p>
+
+<p>重新切回master修改邮箱错误</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout master
+</span><span class='line'>Switched to branch <span class="s1">&#39;master&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>新建分支修改邮箱</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>￼<span class="nv">$ </span>git checkout -b hotfix
+</span><span class='line'>Switched to a new branch <span class="s1">&#39;hotfix&#39;</span>
+</span><span class='line'><span class="nv">$ </span>vim index.html
+</span><span class='line'><span class="nv">$ </span>git commit -a -m <span class="s1">&#39;fixed the broken email address&#39;</span>
+</span><span class='line'><span class="o">[</span>hotfix 36cc781<span class="o">]</span> fixed the broken email address
+</span><span class='line'> <span class="m">1</span> file changed, <span class="m">2</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">2</span> deletions<span class="o">(</span>-<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/13.png" alt="" /></p>
+
+<p>确定两次修改都是我们想要的,我们就可以开始合并分支了</p>
+
+<p>合并hotfix分支</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout master
+</span><span class='line'><span class="nv">$ </span>git merge hotfix Updating f42c576..3a0874c Fast-forward
+</span><span class='line'> index.html <span class="p">|</span> <span class="m">2</span> ++
+</span><span class='line'> <span class="m">1</span> file changed, <span class="m">2</span> insertions<span class="o">(</span>+<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/14.png" alt="" /></p>
+
+<p>删除hotfix分支</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git branch -d hotfix
+</span><span class='line'>Deleted branch hotfix <span class="o">(</span>was 36cc781<span class="o">)</span>.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/15.png" alt="" /></p>
+
+<p>iss53也是同样的步骤,
+master没有向前移动,而是重新创建一个快照</p>
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/16.png" alt="" /></p>
+
+<h2>合并基础</h2>
+
+<p>如果两个分支同时编辑某一行时,就会发生冲突
+例如
+git目录下有一个demo文件,内容为空</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>touch demo
+</span><span class='line'><span class="nv">$ </span>git add demo
+</span><span class='line'><span class="nv">$ </span>git commit -m <span class="s1">&#39;create demo&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>切换分支branch1,第一行写入内容</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout -b branch1
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;branch1 edit&#39;</span>&gt;demo
+</span><span class='line'><span class="nv">$ </span>git commit -a -m <span class="s1">&#39;branch1 edit&#39;</span>
+</span><span class='line'><span class="nv">$ </span>git checkout master
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>切换到分支branch2,第一行写入内容</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout -b branch2
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;branch2 edit&#39;</span>&gt;demo
+</span><span class='line'><span class="nv">$ </span>git commit -a -m <span class="s1">&#39;branch2 edit&#39;</span>
+</span><span class='line'><span class="nv">$ </span>git checkout master
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>合并branch1</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git merge branch1
+</span><span class='line'>Updating f2c9eff..9490dac
+</span><span class='line'>Fast-forward
+</span><span class='line'> demo <span class="p">|</span> <span class="m">1</span> +
+</span><span class='line'> <span class="m">1</span> file changed, <span class="m">1</span> insertion<span class="o">(</span>+<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>合并branch2</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git merge branch2
+</span><span class='line'>Auto-merging demo
+</span><span class='line'>CONFLICT <span class="o">(</span>content<span class="o">)</span>: Merge conflict in demo
+</span><span class='line'>Automatic merge failed<span class="p">;</span> fix conflicts and <span class="k">then</span> commit the result.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>发现存在冲突, 文件demo</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">&lt;&lt;&lt;&lt;&lt;&lt;</span>&lt; HEAD
+</span><span class='line'>branch1 <span class="nv">edit</span>
+</span><span class='line'><span class="o">=======</span>
+</span><span class='line'>branch2 edit
+</span><span class='line'>&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>方法1:mergetool</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git mergetool
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://qktechies.github.io/images/gitqi-bu3/17.png" alt="" /></p>
+
+<h4>方法2:手动编辑文件</h4>
+
+<p>修改文件成你想要的结果
+最后完成merge</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git add demo
+</span><span class='line'><span class="nv">$ </span>git commit -m <span class="s1">&#39;merge branch2&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
 ]]></content>
   </entry>
   
@@ -861,7 +1285,43 @@ M:已经修改过的文件</p>
     <link href="http://qktechies.github.io/blog/2015/01/31/head-first-servlet1/"/>
     <updated>2015-01-31T10:31:01+08:00</updated>
     <id>http://qktechies.github.io/blog/2015/01/31/head-first-servlet1</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<ul>
+<li>HTTP是Hypertext Transfer Protocol,位于TCP/IP上层Web网络协议</li>
+<li>Http使用request/response模型,客户端发起一个Http请求,web服务器返回一个Http response</li>
+<li><p>Http request包括:</p>
+
+<p>请求URL</p>
+
+<p>http方法(GET,POST等等)</p>
+
+<p>可选表单参数数据(query string)</p></li>
+<li><p>Http response包括:</p>
+
+<p>状态码(200,404)</p>
+
+<p>content-type(MIME值,text/html,application/json)</p>
+
+<p>实际response内容(HTML,图片等等)</p></li>
+<li><p>get请求把参数数据拼接到url后面</p></li>
+<li>post请求吧参数数据放在请求body里</li>
+<li>MIME值告诉浏览器数据类型(图片,声音,html),浏览器根据数据类型知道如何渲染它</li>
+<li><p>URL(Uniform Resource Locator) 统一资源定位符,网络上每个资源都有唯一的地址:</p>
+
+<p><a href="http://121.30.50.60:90/2013/4/demo.png">http://121.30.50.60:90/2013/4/demo.png</a></p>
+
+<p><a href="http://:protocol%E5%8D%8F%E8%AE%AE%E5%90%8D">http://:protocol%E5%8D%8F%E8%AE%AE%E5%90%8D</a></p>
+
+<p>121.30.50.60: 服务器名</p>
+
+<p>90: 端口号</p>
+
+<p>2013/4: 路径</p>
+
+<p>demo.png: 资源名称</p></li>
+<li>web服务器擅长于静态html界面,如果你需要在页面上动态加载数据,你就需要其他的app来帮助你,非Java类Perl就用CGI(Common Gateway Interface)</li>
+<li>把html界面放在out.println()中不易于维护,jsp解决了这个问题,可以再html界面中加入java</li>
+</ul>
+
 ]]></content>
   </entry>
   

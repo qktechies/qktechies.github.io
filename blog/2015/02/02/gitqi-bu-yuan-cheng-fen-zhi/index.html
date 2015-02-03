@@ -5,13 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Head First Servlet1 - qkong的技术博客</title>
+  <title>Git起步4-远程分支 - qkong的技术博客</title>
   <meta name="author" content="qktechies">
 
   
-  <meta name="description" content="HTTP是Hypertext Transfer Protocol,位于TCP/IP上层Web网络协议
-Http使用request/response模型,客户端发起一个Http请求,web服务器返回一个Http response
-Http request包括: 请求URL http方法(GET, &hellip;">
+  <meta name="description" content="远程分支是远程仓库中分支状态的指针,他们是本地不能移动的分支 格式(remote)/(branch) 查看所有的远程 1
+2
+3
+$ git remote -v
+origin https://github.com/schacon/simplegit-progit (fetch)
+origin &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +23,7 @@ Http request包括: 请求URL http方法(GET, &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://qktechies.github.io/blog/2015/01/31/head-first-servlet1">
+  <link rel="canonical" href="http://qktechies.github.io/blog/2015/02/02/gitqi-bu-yuan-cheng-fen-zhi">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="qkong的技术博客" type="application/atom+xml">
@@ -70,7 +73,7 @@ Http request包括: 请求URL http方法(GET, &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Head First Servlet1</h1>
+      <h1 class="entry-title">Git起步4-远程分支</h1>
     
     
       <p class="meta">
@@ -79,50 +82,58 @@ Http request包括: 请求URL http方法(GET, &hellip;">
 
 
 
-<time class='entry-date' datetime='2015-01-31T10:31:01+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>10:31 am</span></time>
+<time class='entry-date' datetime='2015-02-02T16:32:19+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>4:32 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><ul>
-<li>HTTP是Hypertext Transfer Protocol,位于TCP/IP上层Web网络协议</li>
-<li>Http使用request/response模型,客户端发起一个Http请求,web服务器返回一个Http response</li>
-<li><p>Http request包括:</p>
+<div class="entry-content"><p>远程分支是远程仓库中分支状态的指针,他们是本地不能移动的分支</p>
 
-<p>请求URL</p>
+<p>格式(remote)/(branch)</p>
 
-<p>http方法(GET,POST等等)</p>
+<h2>查看所有的远程</h2>
 
-<p>可选表单参数数据(query string)</p></li>
-<li><p>Http response包括:</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git remote -v
+</span><span class='line'>origin    https://github.com/schacon/simplegit-progit (fetch)
+</span><span class='line'>origin    https://github.com/schacon/simplegit-progit (push)</span></code></pre></td></tr></table></div></figure>
 
-<p>状态码(200,404)</p>
 
-<p>content-type(MIME值,text/html,application/json)</p>
+<p>默认origin,例如有人开了一个iss53分支纠正bug,那么你申请修改bug时,可以把修改完的代码提交到origin/iss53</p>
 
-<p>实际response内容(HTML,图片等等)</p></li>
-<li><p>get请求把参数数据拼接到url后面</p></li>
-<li>post请求吧参数数据放在请求body里</li>
-<li>MIME值告诉浏览器数据类型(图片,声音,html),浏览器根据数据类型知道如何渲染它</li>
-<li><p>URL(Uniform Resource Locator) 统一资源定位符,网络上每个资源都有唯一的地址:</p>
+<p>origin不是特殊的:
+就像分支master是git目录起始的默认分支名,origin也是git从远程传clone下来后的远程仓库</p>
 
-<p><a href="http://121.30.50.60:90/2013/4/demo.png">http://121.30.50.60:90/2013/4/demo.png</a></p>
+<p>团队开发有个git.ourcompany.com的git服务器,git clone:</p>
 
-<p><a href="http://:protocol%E5%8D%8F%E8%AE%AE%E5%90%8D">http://:protocol%E5%8D%8F%E8%AE%AE%E5%90%8D</a></p>
-
-<p>121.30.50.60: 服务器名</p>
-
-<p>90: 端口号</p>
-
-<p>2013/4: 路径</p>
-
-<p>demo.png: 资源名称</p></li>
-<li>web服务器擅长于静态html界面,如果你需要在页面上动态加载数据,你就需要其他的app来帮助你,非Java类Perl就用CGI(Common Gateway Interface)</li>
-<li>把html界面放在out.println()中不易于维护,jsp解决了这个问题,可以再html界面中加入java</li>
+<ul>
+<li>命名远程仓库为origin,下载所有的数据</li>
+<li>建立一个指向它的master分支指针,在本地命名为origin/master,你无法修改其数据</li>
+<li>建立属于自己的本地master分支,在这个分支上工作</li>
 </ul>
 
+
+<p><img src="/images/gitqi-bu4/1.png" alt="" /></p>
+
+<p>如果有人将他的更新代码提交到服务器git.ourcompany.com上并更新了它的master分支,而我们也在本地修改了代码,此时我们本地的origin/master指针不会移动</p>
+
+<p><img src="/images/gitqi-bu4/2.png" alt="" /></p>
+
+<p>为了同步工作,必须先运行git fetch origin从服务器上拉取没有的数据</p>
+
+<p><img src="/images/gitqi-bu4/3.png" alt="" /></p>
+
+<p>当多个团队开发时,服务器处于git.team1.ourcompany.com,你可以使用git remote add [url]添加远程仓库</p>
+
+<p><img src="/images/gitqi-bu4/4.png" alt="" /></p>
+
+<p>git fetch teamone可以拉取teamone服务器中本地没有的消息,origin/master中包含了teamone/master的所有checksum,所以没有拉取数据而是设置了一个远程分支名为teamone/master</p>
+
+<p><img src="/images/gitqi-bu4/5.png" alt="" /></p>
 </div>
 
 
@@ -138,7 +149,7 @@ Http request包括: 请求URL http方法(GET, &hellip;">
 
 
 
-<time class='entry-date' datetime='2015-01-31T10:31:01+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>10:31 am</span></time>
+<time class='entry-date' datetime='2015-02-02T16:32:19+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>4:32 pm</span></time>
       
 
 
@@ -163,7 +174,7 @@ Http request包括: 请求URL http方法(GET, &hellip;">
 <!-- JiaThis Button END -->
 
 <!-- 多说评论框 start -->
-<div class="ds-thread" data-thread-key="/blog/2015/01/31/head-first-servlet1" data-title="head first servlet1" data-url="http://qktechies.github.io/blog/2015/01/31/head-first-servlet1/"></div>
+<div class="ds-thread" data-thread-key="/blog/2015/02/02/gitqi-bu-yuan-cheng-fen-zhi" data-title="git起步4-远程分支" data-url="http://qktechies.github.io/blog/2015/02/02/gitqi-bu-yuan-cheng-fen-zhi/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
@@ -184,10 +195,8 @@ var duoshuoQuery = {short_name:"qktechies"};
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/01/26/file-and-directory-permissions/" title="Previous Post: file and directory permissions">&laquo; file and directory permissions</a>
+        <a class="basic-alignment left" href="/blog/2015/02/02/gitqi-bu-3/" title="Previous Post: git起步3 - git分支">&laquo; git起步3 - git分支</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/01/31/gitqi-bu-2/" title="Next Post: git起步2">git起步2 &raquo;</a>
       
     </p>
   </footer>
